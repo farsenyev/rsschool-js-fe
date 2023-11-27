@@ -478,10 +478,6 @@ nav a:hover::before{
 .social-icon:hover svg path{
     stroke: #403F3D;
 }
-/*.link-container:hover{*/
-/*    box-sizing: border-box;*/
-/*    border-bottom: 2px solid #E1D4C9;*/
-/*}*/
 .link-container::before{
     content: '';
     position: absolute;
