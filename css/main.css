@@ -135,11 +135,15 @@ nav{
     flex: 1 0 0;
     gap: 40px;
 }
+nav a{
+    position: relative;
+}
 #menu{
     display: flex;
     justify-content: center;
     align-items: flex-start;
     gap: 8px;
+    position: relative;
 }
 .menu-logo{
     height: 20px;
@@ -184,7 +188,9 @@ nav{
     gap: 8px;
     border-radius: 100px;
     background: #E1D4C9;
+    transition: 500ms;
 }
+
 
 .favorite-coffee{
     display: flex;
@@ -213,6 +219,7 @@ nav{
     border: 1px solid  #665F55;
     margin: 0 0 45px 0;
     background: none;
+    transition: 500ms;
 }
 .left-btn{
     transform: rotate(180deg);
@@ -259,33 +266,47 @@ nav{
     max-width: 1360px;
     gap: 40px;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+    "a b"
+    "a b"
+    "a d"
+    "c d"
+    "c d";
     grid-column-gap: 40px;
     grid-row-gap: 40px;
 }
 .img-about{
     border-radius: 20px;
-    object-fit: cover;
+    overflow: hidden;
 }
+.img-about img{
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+.img-top-l{grid-area: a}
+.img-top-r{grid-area: b}
+.img-bot-l{grid-area: c}
+.img-bot-r{grid-area: d}
 .img-girl{
+    border-radius: 20px;
     width: 660px;
     height: 590px;
-    grid-area: 1 / 1 / 6 / 2;
 }
 .img-man{
+    /*border-radius: 20px;*/
     width: 660px;
     height: 430px;
-    grid-area: 1 / 2 / 5 / 3;
 }
 .img-lights{
+    /*border-radius: 20px;*/
     width: 660px;
     height: 430px;
-    grid-area: 6 / 1 / 10 / 2;
 }
 .img-pair{
+    /*border-radius: 20px;*/
     width: 660px;
     height: 590px;
-    grid-area: 5 / 2 / 10 / 3;
 }
 
 .mobile-app{
@@ -323,6 +344,7 @@ nav{
     flex-wrap: wrap;
     text-align: left;
     align-self: flex-start;
+    transition: 500ms;
 }
 .download-logo{
     width: 36px;
@@ -367,6 +389,7 @@ footer{
     border-radius: 100px;
     border: 1px solid #C1B6AD;
     background: none;
+    transition: 500ms;
 }
 
 .contact{
@@ -392,4 +415,91 @@ footer{
     justify-content: flex-start;
     align-items: center;
     gap: 8px;
+    position: relative;
+}
+
+
+/*Animations*/
+*:hover{
+    transition: 450ms;
+}
+#menu::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-out;
+}
+#menu:hover{
+    color: #403F3D;
+}
+#menu:hover::before{
+    width: 100%;
+}
+.menu-btn:hover{
+    padding: 20px 60px;
+}
+nav a::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-out;
+}
+nav a:hover{
+    color: #403F3D;
+}
+nav a:hover::before{
+    width: 100%;
+}
+.slider-btn:hover{
+    background: #665F55;
+}
+.download-btn:hover{
+    background: #665F55;
+}
+.download-btn:hover svg path{
+    fill: #E1D4C9;
+}
+.download-btn:hover p, .download-btn:hover span{
+    color: #E1D4C9;
+}
+.social-icon:hover{
+    background: #E1D4C9;
+}
+.social-icon:hover svg path{
+    stroke: #403F3D;
+}
+/*.link-container:hover{*/
+/*    box-sizing: border-box;*/
+/*    border-bottom: 2px solid #E1D4C9;*/
+/*}*/
+.link-container::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #E1D4C9;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-out;
+}
+.link-container:hover{
+    color: #E1D4C9;
+}
+.link-container:hover::before{
+    width: 100%;
+}
+.img-about:hover img{
+    transform: scale(1);
+    transition: 500ms ease-out;
 }
