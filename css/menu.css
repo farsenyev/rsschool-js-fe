@@ -97,9 +97,17 @@ body{
     padding: 20px 0 40px 0;
     margin: 0 auto;
 }
+.main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    align-self: stretch;
+}
 .header{
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     align-items: center;
     gap: 20px;
     align-self: stretch;
@@ -141,6 +149,15 @@ nav a{
     width: 20px;
 }
 
+.menu{
+    display: flex;
+    padding: 0px 40px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+    align-self: stretch;
+}
 .offer{
     display: flex;
     flex-direction: column;
@@ -174,6 +191,7 @@ nav a{
     border-radius: 100px;
     border: 1px solid #C1B6AD;
     background: none;
+    transition: 500ms;
 }
 .active{
     background: #665F55;
@@ -189,6 +207,40 @@ nav a{
     border-radius: 100px;
     height: 30px;
     width: 30px;
+}
+.item-container{
+    display: flex;
+    max-width: 1360px;
+    justify-content: center;
+    align-items: flex-start;
+    align-content: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.item{
+    display: flex;
+    height: 506px;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.img-con{
+    overflow: hidden;
+    width: 310px;
+    height: 310px;
+    flex-shrink: 0;
+    border-radius: 40px;
+}
+.img-con img{
+    width: 310px;
+    height: 310px;
+    object-fit: cover;
+    transform: scale(1.1);
+    transition: 0.5s;
+}
+.description, .coffee-name, .price{
+    width: 270px;
+    text-align: left;
 }
 
 footer{
@@ -252,4 +304,74 @@ footer{
     align-items: center;
     gap: 8px;
     position: relative;
+}
+
+
+/*Animations*/
+#menu::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #403F3D;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+nav a::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #333;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-out;
+}
+nav a:hover{
+    color: #403F3D;
+}
+nav a:hover::before{
+    width: 100%;
+}
+.control:hover{
+    background: #665F55;
+    transition: 500ms;
+}
+.control:hover{
+    color: #C1B6AD;
+    transition: 500ms;
+}
+.control:hover img{
+    background: #E1D4C9;
+    transition: 500ms;
+}
+
+.img-con:hover img{
+    transform: scale(1);
+    transition: 500ms ease-out;
+}
+.social-icon:hover{
+    background: #E1D4C9;
+}
+.social-icon:hover svg path{
+    stroke: #403F3D;
+}
+.link-container::before{
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    background-color: #E1D4C9;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%);
+    transition: width 0.3s ease-out;
+}
+.link-container:hover{
+    color: #E1D4C9;
+}
+.link-container:hover::before{
+    width: 100%;
 }
