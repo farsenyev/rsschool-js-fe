@@ -1,4 +1,14 @@
 /*Typography*/
+h1{
+    font-family: Inter, sans-serif;
+    font-size: 72px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 105%;
+    color: #403F3D;
+    font-feature-settings: 'clig' off, 'liga' off;
+    margin: 0;
+}
 h2{
     color: #403F3D;
     font-feature-settings: 'clig' off, 'liga' off;
@@ -223,6 +233,9 @@ nav a{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    border-radius: 40px;
+    box-sizing: border-box;
+    border: 1px solid #C1B6AD;
 }
 .img-con{
     overflow: hidden;

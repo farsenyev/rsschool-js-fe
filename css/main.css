@@ -94,6 +94,9 @@ a{
 }
 
 /*Layout*/
+html{
+    scroll-behavior: smooth;
+}
 body{
     background-color: #E1D4C9;
     display: flex;
@@ -105,6 +108,9 @@ body{
     gap: 100px;
     padding: 20px 0 40px 0;
     margin: 0 auto;
+}
+button{
+    border: none;
 }
 .header{
     display: flex;
@@ -462,6 +468,9 @@ nav a:hover::before{
 }
 .slider-btn:hover{
     background: #665F55;
+}
+.slider-btn:hover svg path{
+    stroke: #E1D4C9;
 }
 .download-btn:hover{
     background: #665F55;
