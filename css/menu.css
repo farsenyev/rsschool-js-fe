@@ -394,7 +394,7 @@ a{
         display: none;
     }
     .menu-logo{
-
+        display: none;
     }
     .burger-btn{
         display: flex;
@@ -426,8 +426,9 @@ a{
         display: flex;
         flex-direction: column;
         justify-content: center;
-        align-items: flex-start;
+        align-items: center;
         align-self: stretch;
+        gap: 40px;
     }
     .offer{
         display: flex;
@@ -440,7 +441,7 @@ a{
         color: #403F3D;
         text-align: center;
         font-feature-settings: 'clig' off, 'liga' off;
-        width: 800px;
+        width: 688px;
 
         font-size: 61px;
         font-style: normal;
@@ -451,11 +452,14 @@ a{
         display: flex;
         justify-content: center;
         align-items: center;
+        gap: 16px;
     }
     .control{
         display: flex;
+        padding: 8px 16px 8px 8px;
         justify-content: center;
         align-items: center;
+        gap: 8px;
         border-radius: 100px;
         border: 1px solid #C1B6AD;
         background: none;
@@ -477,9 +481,12 @@ a{
     }
     .item-container{
         display: flex;
+        max-width: 1360px;
         justify-content: center;
         align-items: flex-start;
         align-content: flex-start;
+        gap: 40px;
+        align-self: stretch;
         flex-wrap: wrap;
     }
     .item{
@@ -487,6 +494,8 @@ a{
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
+        height: 506px;
+        width: 310px;
         border-radius: 40px;
         box-sizing: border-box;
         border: 1px solid #C1B6AD;
@@ -495,43 +504,388 @@ a{
         overflow: hidden;
         flex-shrink: 0;
         border-radius: 40px;
+        width: 310px;
+        height: 310px;
     }
     .img-con img{
+        overflow: hidden;
         transform: scale(1.1);
         transition: 0.5s;
     }
-    .description, .coffee-name, .price{
-
+    .inactive-item{
+        display: none;
     }
+    .description, .coffee-name, .price{
+        width: 270px;
+        text-align: left;
+        margin-bottom: 16px;
+    }
+    .refresh-con{
+        display: flex;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+    }
+    .refresh-btn{
+        display: flex;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        border-radius: 100px;
+        border: 1px solid #665F55;
+    }
+
 
 
     footer{
-
+        display: flex;
+        max-width: 1360px;
+        width: 568px;
+        padding: 100px 60px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 100px;
+        border-radius: 40px;
+        background: #665F55;
     }
     .offer-footer{
-
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+        align-self: stretch;
     }
     .socials{
-
+        display: flex;
+        align-items: center;
+        gap: 12px;
     }
     .social-icon{
-
+        display: flex;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        border: 1px solid #C1B6AD;
+        background: none;
     }
 
     .contact{
-
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+        align-self: stretch;
     }
     .links{
-
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 16px;
     }
     .link-container{
-
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 8px;
     }
 
 
 }
 
 @media screen and (max-width: 380px){
+    /*Layout tablet*/
+    html{
+        scroll-behavior: smooth;
+    }
+    body{
+        background-color: #E1D4C9;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        margin: 0 auto;
+        padding: 20px 0 40px 0;
+        gap: 100px;
+        width: 380px;
+    }
+    .main{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .header{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+        padding: 0 16px;
+    }
+    header{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        align-self: stretch;
+    }
+    .logo{
+        height: 60px;
+        width: 100px;
+    }
+    nav{
+        /*display: flex;*/
+        /*justify-content: center;*/
+        /*align-items: center;*/
+        /*align-self: stretch;*/
+        /*flex: 1 0 0;*/
+        display: none;
+    }
+    nav a{
+        position: relative;
+    }
+    #menu{
+        /*display: flex;*/
+        /*justify-content: center;*/
+        /*align-items: flex-start;*/
+        /*position: relative;*/
+        display: none;
+    }
+    .menu-logo{
+        display: none;
+    }
+    .burger-btn{
+        display: flex;
+        width: 44px;
+        height: 44px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        border: 1px solid #665F55;
+        background: none;
+    }
+    .burger-btn-logo{
+        width: 16px;
+        height: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+    .burger-btn svg{
+        stroke-width: 2px;
+        stroke: #403F3D;
+        width: 16px;
+        height: 2px;
+    }
+
+    .menu{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        align-self: stretch;
+        gap: 40px;
+        width: 300px;
+        padding: 0 16px;
+    }
+    .offer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+        align-self: stretch;
+    }
+    .offer-heading{
+        color: #403F3D;
+        text-align: center;
+        font-feature-settings: 'clig' off, 'liga' off;
+
+        font-family: Inter, sans-serif;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 125%;
+    }
+    .controls-panel{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+    }
+    .control{
+        display: flex;
+        padding: 8px 16px 8px 8px;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        border-radius: 100px;
+        border: 1px solid #C1B6AD;
+        background: none;
+        transition: 500ms;
+    }
+    .active{
+        background: #665F55;
+        color: #C1B6AD;
+    }
+    .active p{
+        color: #C1B6AD;
+    }
+    .active .control img{
+        background: #E1D4C9;
+    }
+    .control img{
+        background: #C1B6AD;
+        border-radius: 100px;
+    }
+    .item-container{
+        display: flex;
+        max-width: 1360px;
+        justify-content: center;
+        align-items: flex-start;
+        align-content: flex-start;
+        gap: 40px;
+        align-self: stretch;
+        flex-wrap: wrap;
+    }
+    .item{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: 506px;
+        width: 310px;
+        border-radius: 40px;
+        box-sizing: border-box;
+        border: 1px solid #C1B6AD;
+    }
+    .img-con{
+        overflow: hidden;
+        flex-shrink: 0;
+        border-radius: 40px;
+        width: 310px;
+        height: 310px;
+    }
+    .img-con img{
+        overflow: hidden;
+        transform: scale(1.1);
+        transition: 0.5s;
+    }
+    .inactive-item{
+        display: none;
+    }
+    .description, .coffee-name, .price{
+        width: 270px;
+        text-align: left;
+        margin-bottom: 16px;
+    }
+    .refresh-con{
+        display: flex;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+    }
+    .refresh-btn{
+        display: flex;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        border-radius: 100px;
+        border: 1px solid #665F55;
+    }
+
+
+
+    footer{
+        display: flex;
+        max-width: 1360px;
+        width: 316px;
+        padding: 60px 16px;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 100px;
+        border-radius: 40px;
+        background: #665F55;
+    }
+    h2{
+        color: #E1D4C9;
+        font-feature-settings: 'clig' off, 'liga' off;
+
+        font-family: Inter, sans-serif;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 125%;
+    }
+    h3{
+        color: #E1D4C9;
+        font-feature-settings: 'clig' off, 'liga' off;
+        font-family: Inter, sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 125%;
+    }
+    .offer-footer{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+        align-self: stretch;
+    }
+    .socials{
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+    .social-icon{
+        display: flex;
+        width: 60px;
+        height: 60px;
+        justify-content: center;
+        align-items: center;
+        border-radius: 100px;
+        border: 1px solid #C1B6AD;
+        background: none;
+    }
+
+    .contact{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 40px;
+        align-self: stretch;
+    }
+    .links{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    .link-container{
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
 
 }
 
