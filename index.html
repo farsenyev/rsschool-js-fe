@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/x-con" href="/assets/img/favicon.ico">
 </head>
 <body>
     <section class="header">
@@ -23,16 +24,27 @@
                 <p class="text">Menu</p>
                 <img src="assets/img/coffee-cup.svg" alt="coffee cup" class="menu-logo">
             </a>
+            <button class="burger-btn">
+                <article class="burger-btn-logo">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="2" viewBox="0 0 18 2" fill="none">
+                        <path d="M1 1H17" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="2" viewBox="0 0 18 2" fill="none">
+                        <path d="M1 1H17" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </article>
+            </button>
         </header>
         <section class="hero">
-            <section class="container">
-                <section class="offer-header">
+            <article class="container">
+                <article class="offer-header">
                     <h1 class="heading-text"><span class="allocate-text">Enjoy</span> premium coffee at our charming cafe</h1>
                     <p class="text heading-text">With its inviting atmosphere and delicious coffee options, the Coffee House Resource is a popular
                         destination for coffee lovers and those seeking a warm and inviting space to enjoy their favorite
                         beverage.</p>
                     <a href="html/menu.html">
-                        <button class="menu-btn link">Menu
+                        <button class="menu-btn link">
+                            Menu
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                                 <path d="M14.166 9.76667V11.6667C14.166 14.8883 11.5543 17.5 8.33268 17.5C5.11102 17.5 2.49935 14.8883 2.49935 11.6667V9.76667C2.49935 9.4353 2.76798 9.16667 3.09935 9.16667H13.566C13.8974 9.16667 14.166 9.4353 14.166 9.76667Z" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                                 <path d="M9.99935 7.49996C9.99935 6.66663 10.5946 5.83329 11.7851 5.83329V5.83329C13.1 5.83329 14.166 4.7673 14.166 3.45234V2.91663" stroke="#403F3D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -41,17 +53,17 @@
                             </svg>
                         </button>
                     </a>
-                </section>
-            </section>
-
+                </article>
+            </article>
         </section>
     </section>
-    <sectio id="favorite" class="favorite-coffee">
+    <section id="favorite" class="favorite-coffee">
         <h2>Choose your <span class="allocate-text">favorite</span> coffee</h2>
-        <section class="slider">
-            <button class="slider-btn left-btn">
-                <img src="assets/img/Vector.svg" alt="arrow">
-            </button>
+        <article class="slider">
+            <button class="slider-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>            </button>
             <section class="slider-content">
                 <img src="assets/img/coffee-slider-1.svg" alt="frappuccino" class="slider-img">
                 <h3>S’mores Frappuccino</h3>
@@ -65,10 +77,12 @@
                 </section>
             </section>
             <button class="slider-btn">
-                <img src="assets/img/Vector.svg" alt="arrow">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
             </button>
-        </section>
-    </sectio>
+        </article>
+    </section>
     <section id="about" class="about">
         <h2>Resource is <span class="allocate-text">the perfect and cozy place</span> where you can enjoy a variety of hot beverages, relax, catch up with
             friends, or get some work done.</h2>
@@ -93,23 +107,21 @@
             <p class="text mobile-app-text">Download the Resource app today and experience the comfort of ordering your favorite coffee from
                 wherever you are</p>
             <section class="btns-mobile">
-                <button class="download-btn dbtnApple">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" class="download-logo">
-                        <path d="M3.7558 3.20309C3.39335 3.57302 3.18359 4.14896 3.18359 4.89483V31.4995C3.18359 32.2454 3.39335 32.8213 3.7558 33.1913L3.84525 33.2725L19.1359 18.3701V18.0182L3.84525 3.11587L3.7558 3.20309Z" fill="#403F3D"/>
-                        <path d="M26.0776 23.34L20.9863 18.3701V18.0182L26.0837 13.0482L26.1979 13.1129L32.2345 16.4618C33.9573 17.4122 33.9573 18.9761 32.2345 19.9325L26.1979 23.2754L26.0776 23.34Z" fill="#403F3D"/>
-                        <path d="M25.2733 24.2008L20.0617 19.1196L4.68164 34.1167C5.25384 34.7031 6.18695 34.7738 7.24807 34.1873L25.2733 24.2008Z" fill="#403F3D"/>
-                        <path d="M25.2733 12.1876L7.24807 2.20103C6.18695 1.62058 5.25384 1.69125 4.68164 2.27772L20.0617 17.2688L25.2733 12.1876Z" fill="#403F3D"/>
+                <button class="download-btn dbtnApple text">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="33" viewBox="0 0 28 33" fill="none">
+                        <path d="M22.7073 17.6307C22.6704 13.6324 26.065 11.6872 26.2203 11.5966C24.2977 8.86366 21.3178 8.49026 20.2707 8.46048C17.7679 8.20369 15.3403 9.92062 14.0654 9.92062C12.765 9.92062 10.8017 8.48529 8.68579 8.52747C5.96293 8.56841 3.41566 10.1055 2.0186 12.4923C-0.864579 17.359 1.28572 24.5108 4.04802 28.4446C5.42981 30.3712 7.04444 32.5223 9.15784 32.4466C11.2254 32.3635 11.9978 31.1614 14.4929 31.1614C16.9651 31.1614 17.6903 32.4466 19.8457 32.3983C22.0647 32.3635 23.4618 30.463 24.7952 28.519C26.392 26.3108 27.0333 24.1362 27.0588 24.0245C27.0066 24.0071 22.7493 22.4229 22.7073 17.6307Z" fill="#403F3D"/>
+                        <path d="M18.6357 5.87268C19.7477 4.51675 20.5086 2.67205 20.2974 0.800049C18.6879 0.86952 16.675 1.88554 15.5159 3.21169C14.4903 4.38029 13.5742 6.29571 13.8109 8.097C15.6189 8.2285 17.4753 7.20752 18.6357 5.87268Z" fill="#403F3D"/>
                     </svg>
-                    <p class="text"><span class="avaliable-text">Available on</span><br>App Store</p>
+                    <span class="text"><span class="avaliable-text">Available on</span><br>App Store</span>
                 </button>
-                <button class="download-btn dbtnAndroid">
+                <button class="download-btn dbtnAndroid text">
                     <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 36 36" fill="none" class="download-logo">
                         <path d="M3.7558 3.20309C3.39335 3.57302 3.18359 4.14896 3.18359 4.89483V31.4995C3.18359 32.2454 3.39335 32.8213 3.7558 33.1913L3.84525 33.2725L19.1359 18.3701V18.0182L3.84525 3.11587L3.7558 3.20309Z" fill="#403F3D"/>
                         <path d="M26.0776 23.34L20.9863 18.3701V18.0182L26.0837 13.0482L26.1979 13.1129L32.2345 16.4618C33.9573 17.4122 33.9573 18.9761 32.2345 19.9325L26.1979 23.2754L26.0776 23.34Z" fill="#403F3D"/>
                         <path d="M25.2733 24.2008L20.0617 19.1196L4.68164 34.1167C5.25384 34.7031 6.18695 34.7738 7.24807 34.1873L25.2733 24.2008Z" fill="#403F3D"/>
                         <path d="M25.2733 12.1876L7.24807 2.20103C6.18695 1.62058 5.25384 1.69125 4.68164 2.27772L20.0617 17.2688L25.2733 12.1876Z" fill="#403F3D"/>
                     </svg>
-                    <p class="text"><span class="avaliable-text">Available on</span><br>Google Play</p>
+                    <span class="text"><span class="avaliable-text">Available on</span><br>Google Play</span>
                 </button>
             </section>
         </section>
@@ -141,18 +153,18 @@
         <section class="contact">
             <h3 class="footer-links">Contact us</h3>
             <section class="links">
-                <section class="link-container">
+                <a class="link-container" href="https://maps.app.goo.gl/rJYh5P3LZC6VGQqH9" target="_blank">
                     <img src="assets/img/pin-alt.svg" alt="point-icon">
                     <p class="text footer-links">8558 Green Rd.,  LA</p>
-                </section>
-                <section class="link-container">
+                </a>
+                <a class="link-container" href="tel:+1 (603) 555-0123">
                     <img src="assets/img/phone.svg" alt="phone-icon">
                     <p class="text footer-links">+1 (603) 555-0123</p>
-                </section>
-                <section class="link-container">
+                </a>
+                <article class="link-container">
                     <img src="assets/img/clock.svg" alt="clock-icon">
                     <p class="text footer-links">Mon-Sat: 9:00 AM – 23:00 PM</p>
-                </section>
+                </article>
             </section>
         </section>
     </footer>
