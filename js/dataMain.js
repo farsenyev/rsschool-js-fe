@@ -7,7 +7,7 @@ const data = [
         "price": "5.50"
     },
     {
-        "imgurl": "../assets/img/coffee-slider-2.svg",
+        "imgurl": "assets/img/coffee-slider-2.svg",
         "name": "Caramel Macchiato",
         "description": "Fragrant and unique classic espresso with rich caramel-peanut syrup, with cream under whipped " +
             "thick foam.",
