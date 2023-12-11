@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-con" href="/assets/img/favicon.ico">
+    <script src="js/main.js" type="module"></script>
 </head>
 <body>
     <section class="header">
@@ -60,23 +61,14 @@
     <section id="favorite" class="favorite-coffee">
         <h2>Choose your <span class="allocate-text">favorite</span> coffee</h2>
         <article class="slider">
-            <button class="slider-btn">
+            <button class="slider-btn" id="l-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M18.5 12H6M6 12L12 6M6 12L12 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>            </button>
             <section class="slider-content">
-                <img src="assets/img/coffee-slider-1.svg" alt="frappuccino" class="slider-img">
-                <h3>S’mores Frappuccino</h3>
-                <p class="text slider-text">This new drink takes an espresso and mixes it with brown sugar and cinnamon before being
-                    topped with oat milk.</p>
-                <h3>$5.50</h3>
-                <section class="controls">
-                    <button class="control-btn active"></button>
-                    <button class="control-btn"></button>
-                    <button class="control-btn"></button>
-                </section>
+
             </section>
-            <button class="slider-btn">
+            <button class="slider-btn" id="r-btn">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M6 12H18.5M18.5 12L12.5 6M18.5 12L12.5 18" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>

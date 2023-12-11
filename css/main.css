@@ -131,6 +131,15 @@ a{
         height: 20px;
         width: 20px;
     }
+    .burger-btn{
+        display: none;
+    }
+    .burger-btn-logo{
+        display: none;
+    }
+    .burger-btn svg{
+        display: none;
+    }
 
     .hero{
         max-width: 1360px;
