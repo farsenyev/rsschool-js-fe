@@ -1,6 +1,11 @@
 import data from "../js/dataMain.js"
+const burgerBtn = document.querySelector('.burger-btn')
 
 const slider = document.querySelector('.slider-content')
+
+function sleep(ms){
+    return new Promise(resolve => setTimeout(resolve, ms))
+}
 
 class Carousel {
     num = 0;
@@ -199,4 +204,89 @@ class Carousel {
 
 }
 
+class Burger {
+    constructor(elem) {
+        this.elem = elem
+        this.render()
+    }
+
+    render(){
+        this.addMenuBtn()
+        this.elem.addEventListener("click", () =>{
+            this.mainButtonAction()
+        })
+    }
+
+    addMenuBtn(){
+        let nav = document.querySelector('nav')
+
+        const menuBtn = document.createElement('a')
+        menuBtn.href = "../html/menu.html"
+        menuBtn.classList.add('menu-btn2')
+
+        const text = document.createElement('p')
+        text.textContent = 'Menu'
+        text.classList.add('text')
+
+        const img = document.createElement('img')
+        img.src = "../assets/img/coffee-cup.svg"
+        img.alt = "coffee cup"
+        img.classList.add('menu-logo')
+
+        menuBtn.append(text, img)
+
+        nav.append(menuBtn)
+
+    }
+
+    mainButtonAction(){
+        let nav = document.querySelector('nav')
+        if (!nav.classList.contains('burger-show')){
+            nav.classList.remove('burger-hide')
+            nav.style.display = 'flex'
+            nav.classList.add('burger-show')
+            this.rotateToX()
+        }else{
+            nav.classList.add('burger-hide')
+            this.rotateBack()
+            sleep(990).then(() => {
+                nav.style.display = 'none'
+                nav.classList.remove('burger-show')
+
+            })
+        }
+    }
+
+    rotateToX(){
+        let log1 = document.querySelectorAll('.burger-btn-logo svg')[0]
+        let log2 = document.querySelectorAll('.burger-btn-logo svg')[1]
+
+        if (log1.classList.contains('back-lines')){
+            log1.classList.add('rotate-top-line')
+            log2.classList.add('rotate-bot-line')
+            log1.classList.remove('back-lines')
+            log2.classList.remove('back-lines')
+        }else{
+            log1.classList.add('rotate-top-line')
+            log2.classList.add('rotate-bot-line')
+        }
+
+    }
+
+    rotateBack(){
+        let log1 = document.querySelectorAll('.burger-btn-logo svg')[0]
+        let log2 = document.querySelectorAll('.burger-btn-logo svg')[1]
+
+        log1.classList.add('back-lines')
+        log2.classList.add('back-lines')
+        sleep(990).then(() => {
+            log1.classList.remove('rotate-top-line')
+            log2.classList.remove('rotate-bot-line')
+        })
+    }
+
+
+}
+
+const bur = new Burger(burgerBtn)
 const slide = new Carousel(slider, data)

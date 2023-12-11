@@ -38,29 +38,38 @@ class Menu {
         coffeeBtn.textContent = 'Coffee'
         coffeeBtn.classList.add('control')
         coffeeBtn.classList.add('active')
+        const coffeeImg = document.createElement('img')
+        coffeeImg.src = '../assets/img/coffee.svg'
         coffeeBtn.addEventListener("click", () => {
             this.renderCards('coffee')
             this.activateControls(contrContainer)
             coffeeBtn.classList.add('active')
         })
+        coffeeBtn.prepend(coffeeImg)
 
         const teaBtn = document.createElement('button')
         teaBtn.textContent = 'Tea'
         teaBtn.classList.add('control')
+        const teaImg = document.createElement('img')
+        teaImg.src = '../assets/img/tea.svg'
         teaBtn.addEventListener("click", () => {
             this.renderCards('tea')
             this.activateControls(contrContainer)
             teaBtn.classList.add('active')
         })
+        teaBtn.prepend(teaImg)
 
         const desertBtn = document.createElement('button')
         desertBtn.textContent = 'Deserts'
         desertBtn.classList.add('control')
+        const desertImg = document.createElement('img')
+        desertImg.src = '../assets/img/desert.svg'
         desertBtn.addEventListener("click", () => {
             this.renderCards('dessert')
             this.activateControls(contrContainer)
             desertBtn.classList.add('active')
         })
+        desertBtn.prepend(desertImg)
 
         contrContainer.append(coffeeBtn, teaBtn, desertBtn)
 
