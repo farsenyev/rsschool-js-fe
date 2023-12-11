@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;400&display=swap" rel="stylesheet">
     <link rel="icon" type="image/x-con" href="../assets/img/favicon.ico">
-
+    <script src="../js/menu.js" type="module"></script>
 </head>
 <body>
     <section class="main">
@@ -24,7 +24,7 @@
                     <a href="../index.html#mobile" class="link">Mobile app</a>
                     <a href="#footer" class="link">Contact us</a>
                 </nav>
-                <a href="../html/menu.html" id="menu">
+                <a href="../html/menu.html" id="menu-btn">
                     <p class="text">Menu</p>
                     <img src="../assets/img/coffee-cup.svg" alt="coffee cup" class="menu-logo">
                 </a>
@@ -40,98 +40,11 @@
                 </button>
             </header>
         </article>
-        <section class="menu">
+        <section class="menu" id="menu">
             <article class="offer">
                 <h1 class="offer-heading">Behind each of our cups hides an <span class="allocate-text">amazing surprise</span></h1>
-                <section class="controls-panel">
-                    <button class="control active link">
-                        <img src="../assets/img/%20coffee.svg" alt="coffee logo">
-                        Coffee
-                    </button>
-                    <button class="control link">
-                        <img src="../assets/img/tea.svg" alt="tea logo">
-                        Tea
-                    </button>
-                    <button class="control link">
-                        <img src="../assets/img/desert.svg" alt="desert logo">
-                        Desert
-                    </button>
-                </section>
             </article>
-            <article class="item-container">
-                <section class="item">
-                    <article class="img-con">
-                        <img src="../assets/img/coffee-1.svg" alt="">
-                    </article>
-                    <h3 class="coffee-name">Irish coffee</h3>
-                    <p class="description text">Fragrant black coffee with Jameson Irish whiskey and whipped milk</p>
-                    <h3 class="price">$7.00</h3>
-                </section>
-                <section class="item">
-                    <article class="img-con">
-                        <img src="../assets/img/coffee-2.svg" alt="">
-                    </article>
-                    <h3 class="coffee-name">Kahlua coffee</h3>
-                    <p class="description text">Classic coffee with milk and Kahlua liqueur under a cap of frothed milk</p>
-                    <h3 class="price">$7.00</h3>
-                </section>
-                <section class="item">
-                    <article class="img-con">
-                        <img src="../assets/img/coffee-3.svg" alt="">
-                    </article>
-                    <h3 class="coffee-name">Honey raf</h3>
-                    <p class="description text">Espresso with frothed milk, cream and aromatic honey</p>
-                    <h3 class="price">$5.50</h3>
-                </section>
-                <section class="item">
-                    <article class="img-con">
-                        <img src="../assets/img/coffee-4.svg" alt="">
-                    </article>
-                    <h3 class="coffee-name">Ice cappuccino</h3>
-                    <p class="description text">Cappuccino with soft thick foam in summer version with ice</p>
-                    <h3 class="price">$5.00</h3>
-                </section>
-                <section class="item inactive-item">
-                    <article class="img-con">
-                        <img src="../assets/img/coffee-5.svg" alt="">
-                    </article>
-                    <h3 class="coffee-name">Espresso</h3>
-                    <p class="description text">Classic black coffee</p>
-                    <h3 class="price">$4.50</h3>
-                </section>
-                <section class="item inactive-item">
-                    <article class="img-con">
-                        <img src="../assets/img/coffee-6.svg" alt="">
-                    </article>
-                    <h3 class="coffee-name">Latte</h3>
-                    <p class="description text">Espresso coffee with the addition of steamed milk and dense milk foam</p>
-                    <h3 class="price">$5.50</h3>
-                </section>
-                <section class="item inactive-item">
-                    <article class="img-con">
-                        <img src="../assets/img/coffee-7.svg" alt="">
-                    </article>
-                    <h3 class="coffee-name">Latte macchiato</h3>
-                    <p class="description text">Espresso with frothed milk and chocolate</p>
-                    <h3 class="price">$5.50</h3>
-                </section>
-                <section class="item inactive-item">
-                    <article class="img-con">
-                        <img src="../assets/img/coffee-8.svg" alt="">
-                    </article>
-                    <h3 class="coffee-name">Coffee with cognac</h3>
-                    <p class="description text">Fragrant black coffee with cognac and whipped cream</p>
-                    <h3 class="price">$6.50</h3>
-                </section>
-            </article>
-            <article class="refresh-con">
-                <button class="refresh-btn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M21.8883 13.5C21.1645 18.3113 17.013 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C16.1006 2 19.6248 4.46819 21.1679 8" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M17 8H21.4C21.7314 8 22 7.73137 22 7.4V3" stroke="#403F3D" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
-                </button>
-            </article>
+
         </section>
     </section>
     <footer id="footer">
