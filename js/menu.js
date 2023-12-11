@@ -138,13 +138,36 @@ class Menu {
 class Burger {
     constructor(elem) {
         this.elem = elem
-        this.init()
+        this.render()
     }
 
-    init(){
+    render(){
+        this.addMenuBtn()
         this.elem.addEventListener("click", () =>{
             this.mainButtonAction()
         })
+    }
+
+    addMenuBtn(){
+        let nav = document.querySelector('nav')
+
+        const menuBtn = document.createElement('a')
+        menuBtn.href = "../html/menu.html"
+        menuBtn.classList.add('menu-btn2')
+
+        const text = document.createElement('p')
+        text.textContent = 'Menu'
+        text.classList.add('text')
+
+        const img = document.createElement('img')
+        img.src = "../assets/img/coffee-cup.svg"
+        img.alt = "coffee cup"
+        img.classList.add('menu-logo')
+
+        menuBtn.append(text, img)
+
+        nav.append(menuBtn)
+
     }
 
     mainButtonAction(){

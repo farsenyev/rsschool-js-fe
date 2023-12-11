@@ -533,6 +533,13 @@ header{
     padding: 40px 0 0 0;
 
 }
+.slider-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 480px;
+}
 .slider-btn{
     display: flex;
     width: 60px;
