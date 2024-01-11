@@ -1,4 +1,4 @@
-import "./style.css"
+// import "./style.css"
 import Hangman from "./app/hangman.js"
 // import data from "data.js"
 

@@ -4,19 +4,26 @@ class Hangman {
     constructor(parent) {
         // this.data = data;
         this.parent = parent;
+        this.container = null;
 
         this.init()
     }
 
     init(){
-        const container = document.createElement('main');
-        container.classList.add('main__container')
-        container.innerText = 'work'
+        this.container = document.createElement('main');
+        this.container.classList.add('main__container')
 
         const gallows = new Gallow()
 
-        container.append(gallows.getHtml())
-        this.parent.append(container)
+        this.container.append(gallows.getHtml())
+        this.parent.append(this.container)
+
+        document.addEventListener('click', () => {this.clickHandler()})
+    }
+
+    clickHandler(){
+        const event = new Event('wrong')
+        document.dispatchEvent(event)
     }
 }
 

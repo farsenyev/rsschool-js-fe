@@ -13,9 +13,11 @@ class Gallow {
        this.createHtml(gallowContainer)
 
        this.gallow = gallowContainer
+
+        document.addEventListener('wrong', () => {this.wrongHandler()})
     }
 
-    createHtml(){
+    createHtml(parent){
         const avaregeNumber = document.createElement('h3');
         avaregeNumber.classList.add('gallow__counter');
         avaregeNumber.innerHTML = `Attempts: ${this.counter}`;
@@ -30,6 +32,11 @@ class Gallow {
         name.innerHTML = 'Hangman'
 
         parent.append(name, mainImg, avaregeNumber)
+    }
+
+    wrongHandler(){
+        this.counter ++
+        console.log('+1')
     }
 
     getHtml(){
