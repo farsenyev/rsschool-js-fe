@@ -1,0 +1,13 @@
+.qa__letter{
+    border-bottom: 2px black solid;
+    padding: 10px;
+}
+.qa__answ{
+    display: flex;
+    gap: 20px;
+}
+
+.keyboard__container{
+    display: flex;
+    gap: 10px;
+}
