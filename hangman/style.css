@@ -1,3 +1,21 @@
+.main__container{
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+    "gallow qa"
+    "gallow keyboard";
+    /*max-width: 1000px;*/
+}
+
+
+.qa__container{
+    grid-area: qa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 200px;
+}
 .qa__letter{
     border-bottom: 2px black solid;
     padding: 10px;
@@ -8,6 +26,26 @@
 }
 
 .keyboard__container{
+    grid-area: keyboard;
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 600px;
+    height: 200px;
     gap: 10px;
+}
+.keyboard__key{
+    text-align: center;
+    width: 30px;
+    height: 30px;
+}
+
+
+.gallow__container{
+    grid-area: gallow;
+}
+.gallow__img{
+    height: 350px;
 }

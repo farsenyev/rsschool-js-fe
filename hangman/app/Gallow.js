@@ -1,45 +1,37 @@
 class Gallow {
-    constructor() {
-        this.counter = 0;
+    constructor(state) {
+        this.state= state;
         this.gallow = null;
-        this.acounter = null;
 
         this.init()
     }
 
     init(){
-       const gallowContainer = document.createElement('section');
-       gallowContainer.classList.add('gallow__container');
-       
-       const avaregeNumber = document.createElement('h3');
-       avaregeNumber.classList.add('gallow__counter');
-       avaregeNumber.innerHTML = this.counter;
-       this.acounter = avaregeNumber
+        const gallowContainer = document.createElement('section');
+        gallowContainer.classList.add('gallow__container');
 
-       this.createHtml(gallowContainer)
+        const imgContainer = document.createElement('div');
+        imgContainer.classList.add('gallow__img-container');
 
-       this.gallow = gallowContainer
+        this.createHtml(gallowContainer)
 
-        document.addEventListener('wrong', () => {this.wrongHandler()})
+        this.gallow = gallowContainer
+        this.gallow.append(imgContainer)
+
     }
 
     createHtml(parent){
         let mainImg = document.createElement('img');
         mainImg.classList.add('gallow__img');
-        mainImg.src = '';
+        mainImg.src = '../assets/gallows.svg';
         mainImg.alt = 'gallow';
 
         let name = document.createElement('h1');
-        name.classList.add('gallow__nmae');
+        name.classList.add('gallow__name');
         name.innerHTML = 'Hangman'
 
-        parent.append(name, mainImg, this.acounter)
-    }
+        parent.append(name, mainImg)
 
-    wrongHandler(){
-        this.counter ++
-        this.acounter.innerHTML = this.counter;
-        console.log('+1')
     }
 
     getHtml(){

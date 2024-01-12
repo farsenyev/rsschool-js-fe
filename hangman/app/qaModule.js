@@ -2,8 +2,10 @@ class QaModule {
     constructor(data, state) {
         this.data = data;
         this.state = state;
+        this.correctCounter = 0;
         this.quest = null;
-        this.answ = null
+        this.answ = null;
+        this.acounter = null;
 
         this.init()
     }
@@ -15,13 +17,22 @@ class QaModule {
         this.answ = document.createElement('div');
         this.answ.classList.add('qa__answ');
 
+        const avaregeNumber = document.createElement('h3');
+        avaregeNumber.classList.add('qa__counter');
+        avaregeNumber.innerHTML = `${this.state.incorrectCounter}/6`;
+        this.acounter = avaregeNumber
+
         this.newGame()
 
+        document.addEventListener('wrong', () => {this.wrongHandler()})
         document.addEventListener('correct', (event) => {this.showLetter(event)})
 
     }
 
     newGame(){
+        this.correctCounter = 0
+        this.state.incorrectCounter = 0
+        this.acounter.innerHTML = `${this.state.incorrectCounter}/6`
         const newQuestIndex = this.getRandom(this.data.length)
         if (newQuestIndex !== this.state.lastQuestIndex){
             this.state.lastQuestIndex = newQuestIndex
@@ -29,6 +40,7 @@ class QaModule {
             this.state.answer = newQuest.answer
 
             this.quest.innerHTML = newQuest.quest
+            this.answ.innerHTML = ''
             newQuest.answer.split('').forEach(el => {
                 const letter = document.createElement('h3')
                 letter.classList.add('qa__letter')
@@ -43,11 +55,35 @@ class QaModule {
     showLetter(event){
         const letters = document.querySelectorAll('.qa__letter')
         for (let i = 0; i < letters.length; i++){
-            if ( this.state.answer[i] === event.detail){
+            if ( this.state.answer[i] === event.detail && letters[i].innerHTML === ''){
                 letters[i].innerHTML = event.detail
+                this.correctCounter ++
+                if (this.correctCounter === this.state.answer.length){
+                    this.sleep(500).then(() =>{
+                        // alert('You won!')
+                        // call function with congratulation and play again
+
+                        this.newGame()
+                    })
+                }
             }
         }
     }
+
+    wrongHandler(){
+        this.state.incorrectCounter ++
+        this.acounter.innerHTML = `${this.state.incorrectCounter}/6`;
+        if (this.state.incorrectCounter >= 6){
+            this.sleep(500).then(() =>{
+                // alert('You lose!')
+                // call function with sorry and play again
+
+                this.newGame()
+            })
+        }
+    }
+
+
 
     getRandom(length){
         return Math.floor(Math.random() * length)
@@ -56,8 +92,12 @@ class QaModule {
     getHTML(){
         const container = document.createElement('section');
         container.classList.add('qa__container')
-        container.append(this.quest, this.answ)
+        container.append(this.quest, this.answ, this.acounter)
         return container
+    }
+
+    sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
     }
 }
 

@@ -12,7 +12,8 @@ class Hangman {
         this.keyboard = null;
         this.state = {
             lastQuestIndex: '',
-            answer: ''
+            answer: '',
+            incorrectCounter: 0
         }
 
         this.init()
@@ -22,12 +23,9 @@ class Hangman {
         this.container = document.createElement('main');
         this.container.classList.add('main__container')
 
-        const gallows = new Gallow()
-        this.gallow = gallows
-        const QA = new QaModule(this.data, this.state)
-        this.qa = QA
-        const keyboard = new Keyboard(this.state)
-        this.keyboard = keyboard
+        this.gallow = new Gallow(this.state)
+        this.qa = new QaModule(this.data, this.state)
+        this.keyboard = new Keyboard(this.state)
 
         this.container.append(this.gallow.getHtml())
         this.container.append(this.qa.getHTML())
