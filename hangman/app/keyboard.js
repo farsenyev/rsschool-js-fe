@@ -30,6 +30,9 @@ class Keyboard {
         if (!this.state.answer.includes(target.innerHTML)){
             const event = new Event('wrong')
             document.dispatchEvent(event)
+        }else{
+            const event = new CustomEvent('correct', {detail: target.innerHTML})
+            document.dispatchEvent(event)
         }
     }
 

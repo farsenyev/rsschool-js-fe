@@ -7,6 +7,9 @@ class Hangman {
         this.data = data;
         this.parent = parent;
         this.container = null;
+        this.gallow = null;
+        this.qa = null;
+        this.keyboard = null;
         this.state = {
             lastQuestIndex: '',
             answer: ''
@@ -20,12 +23,15 @@ class Hangman {
         this.container.classList.add('main__container')
 
         const gallows = new Gallow()
+        this.gallow = gallows
         const QA = new QaModule(this.data, this.state)
+        this.qa = QA
         const keyboard = new Keyboard(this.state)
+        this.keyboard = keyboard
 
-        this.container.append(gallows.getHtml())
-        this.container.append(QA.getHTML())
-        this.container.append(keyboard.getHTML())
+        this.container.append(this.gallow.getHtml())
+        this.container.append(this.qa.getHTML())
+        this.container.append(this.keyboard.getHTML())
         this.parent.append(this.container)
 
         document.addEventListener('keyup', (event) => {this.clickHandler(event)})
@@ -37,7 +43,8 @@ class Hangman {
             const event = new Event('wrong')
             document.dispatchEvent(event)
         }else{
-            // show letter
+            const event = new CustomEvent('correct', {detail: key})
+            document.dispatchEvent(event)
         }
 
     }

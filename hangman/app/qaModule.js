@@ -17,6 +17,8 @@ class QaModule {
 
         this.newGame()
 
+        document.addEventListener('correct', (event) => {this.showLetter(event)})
+
     }
 
     newGame(){
@@ -35,6 +37,15 @@ class QaModule {
             })
         }else{
             this.newGame()
+        }
+    }
+
+    showLetter(event){
+        const letters = document.querySelectorAll('.qa__letter')
+        for (let i = 0; i < letters.length; i++){
+            if ( this.state.answer[i] === event.detail){
+                letters[i].innerHTML = event.detail
+            }
         }
     }
 
