@@ -1,4 +1,3 @@
-// import "./style.css"
 import Hangman from "./app/hangman.js"
 import data from "./app/data.js"
 

@@ -1,9 +1,8 @@
 class Gallow {
-    constructor(state) {
-        this.state= state;
+    constructor() {
         this.gallow = null;
 
-        this.init()
+        this.init();
     }
 
     init(){
@@ -13,10 +12,12 @@ class Gallow {
         const imgContainer = document.createElement('div');
         imgContainer.classList.add('gallow__img-container');
 
-        this.createHtml(gallowContainer)
+        this.createHtml(gallowContainer);
 
-        this.gallow = gallowContainer
-        this.gallow.append(imgContainer)
+
+
+        this.gallow = gallowContainer;
+        this.gallow.append(imgContainer);
 
     }
 
@@ -30,12 +31,12 @@ class Gallow {
         name.classList.add('gallow__name');
         name.innerHTML = 'Hangman'
 
-        parent.append(name, mainImg)
+        parent.append(name, mainImg);
 
     }
 
     getHtml(){
-        return this.gallow
+        return this.gallow;
     }
 }
 

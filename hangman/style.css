@@ -8,7 +8,6 @@
     /*max-width: 1000px;*/
 }
 
-
 .qa__container{
     grid-area: qa;
     display: flex;
@@ -72,7 +71,6 @@
     z-index: 3;
     left: auto;
     right: auto;
-    /*margin: auto;*/
     width: 40%;
     height: 40%;
     background: aliceblue;
@@ -80,4 +78,40 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+}
+
+.img__head{
+    position: absolute;
+    left: 140px;
+    top: 135px;
+}
+
+.img__body{
+    position: absolute;
+    left: 188px;
+    top: 232px;
+}
+
+.img__hand-one{
+    position: absolute;
+    left: 125px;
+    top: 245px;
+}
+
+.img__hand-two{
+    position: absolute;
+    left: 188px;
+    top: 245px;
+}
+
+.img__leg-one{
+    position: absolute;
+    left: 125px;
+    top: 355px;
+}
+
+.img__leg-two{
+    position: absolute;
+    left: 188px;
+    top: 355px;
 }
