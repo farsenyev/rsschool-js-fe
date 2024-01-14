@@ -30,22 +30,27 @@ class QaModule {
     }
 
     newGame(){
-        this.correctCounter = 0
-        this.state.incorrectCounter = 0
-        this.acounter.innerHTML = `${this.state.incorrectCounter}/6`
-        const newQuestIndex = this.getRandom(this.data.length)
-        if (newQuestIndex !== this.state.lastQuestIndex){
-            this.state.lastQuestIndex = newQuestIndex
-            const newQuest = this.data[newQuestIndex]
-            this.state.answer = newQuest.answer
+        this.correctCounter = 0;
+        this.state.incorrectCounter = 0;
 
-            this.quest.innerHTML = newQuest.quest
-            this.answ.innerHTML = ''
+        this.acounter.innerHTML = `${this.state.incorrectCounter}/6`;
+        const newQuestIndex = this.getRandom(this.data.length);
+
+        if (newQuestIndex != this.state.lastQuestIndex){
+            this.state.lastQuestIndex = newQuestIndex;
+            sessionStorage.setItem('lastIndex', String(newQuestIndex))
+
+            const newQuest = this.data[newQuestIndex];
+            this.state.answer = newQuest.answer;
+            this.quest.innerHTML = newQuest.quest;
+
+            this.answ.innerHTML = '';
+
             newQuest.answer.split('').forEach(el => {
                 const letter = document.createElement('h3')
-                letter.classList.add('qa__letter')
+                letter.classList.add('qa__letter');
 
-                this.answ.append(letter)
+                this.answ.append(letter);
             })
         }else{
             this.newGame()
@@ -83,8 +88,6 @@ class QaModule {
             })
         }
     }
-
-
 
     getRandom(length){
         return Math.floor(Math.random() * length)

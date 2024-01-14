@@ -6,6 +6,7 @@ class Hangman {
     constructor(parent,data) {
         this.data = data;
         this.parent = parent;
+        this.keys = [];
         this.container = null;
         this.gallow = null;
         this.qa = null;
@@ -15,6 +16,7 @@ class Hangman {
             answer: '',
             incorrectCounter: 0
         }
+        this.state.lastQuestIndex = sessionStorage.getItem('lastIndex')
 
         this.init()
     }
@@ -39,6 +41,12 @@ class Hangman {
     clickHandler(event){
         const key = event.key
 
+
+        if (this.keys.includes(key) || (key.charCodeAt(0) < 97 || key.charCodeAt(0) > 122)){
+            return;
+        }
+
+        this.keys.push(key)
         const remove = new CustomEvent('removeButton', {detail: key})
         document.dispatchEvent(remove)
 
@@ -62,10 +70,13 @@ class Hangman {
         const buttonGE = document.createElement('button');
         buttonGE.classList.add('main__modal__button-ge');
         buttonGE .innerHTML = 'New Game'
-        buttonGE.addEventListener('click', () => {location.reload()})
+        buttonGE.addEventListener('click', () => {
+
+            location.reload();
+        })
 
         const answ = document.createElement('h3');
-        answ.classList.add('main__modal__anaw');
+        answ.classList.add('main__modal__answ');
         answ.innerHTML = this.state.answer;
 
         const msg = document.createElement('h2');
