@@ -62,8 +62,9 @@ class QaModule {
                     this.sleep(500).then(() =>{
                         // alert('You won!')
                         // call function with congratulation and play again
-
-                        this.newGame()
+                        const event = new CustomEvent('gameEnd', {detail: 1})
+                        document.dispatchEvent(event)
+                        // this.newGame()
                     })
                 }
             }
@@ -77,8 +78,8 @@ class QaModule {
             this.sleep(500).then(() =>{
                 // alert('You lose!')
                 // call function with sorry and play again
-
-                this.newGame()
+                const event = new CustomEvent('gameEnd', {detail: 0})
+                document.dispatchEvent(event)
             })
         }
     }

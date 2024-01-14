@@ -12,6 +12,7 @@ class Keyboard {
         this.keyboard = keyboardContainer
 
         this.createKeyboard()
+        document.addEventListener('removeButton', (event) => {this.disableButton(event.detail)})
     }
 
     createKeyboard(){
@@ -27,12 +28,24 @@ class Keyboard {
     clickHandler(event){
         const target = event.target
 
+        const remove = new CustomEvent('removeButton', {detail: target.innerHTML})
+        document.dispatchEvent(remove)
+
         if (!this.state.answer.includes(target.innerHTML)){
             const event = new Event('wrong')
             document.dispatchEvent(event)
         }else{
             const event = new CustomEvent('correct', {detail: target.innerHTML})
             document.dispatchEvent(event)
+        }
+    }
+
+    disableButton(btn){
+        const btns = document.getElementsByClassName('keyboard__key')
+        for (let i = 0; i < btns.length; i++){
+            if (btns[i].innerHTML === btn){
+                btns[i].disabled = true;
+            }
         }
     }
 

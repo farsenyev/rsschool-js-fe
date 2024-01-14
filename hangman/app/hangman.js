@@ -33,10 +33,15 @@ class Hangman {
         this.parent.append(this.container)
 
         document.addEventListener('keyup', (event) => {this.clickHandler(event)})
+        document.addEventListener('gameEnd', (event) => {this.gameEnd(event.detail)})
     }
 
     clickHandler(event){
         const key = event.key
+
+        const remove = new CustomEvent('removeButton', {detail: key})
+        document.dispatchEvent(remove)
+
         if (!this.state.answer.includes(key)){
             const event = new Event('wrong')
             document.dispatchEvent(event)
@@ -45,6 +50,39 @@ class Hangman {
             document.dispatchEvent(event)
         }
 
+    }
+
+    gameEnd(status){
+        const modal = document.createElement('section');
+        modal.classList.add('main__modal');
+
+        const modalOverlay = document.createElement('section');
+        modalOverlay.classList.add('main__modal-overlay');
+
+        const buttonGE = document.createElement('button');
+        buttonGE.classList.add('main__modal__button-ge');
+        buttonGE .innerHTML = 'New Game'
+        buttonGE.addEventListener('click', () => {location.reload()})
+
+        const answ = document.createElement('h3');
+        answ.classList.add('main__modal__anaw');
+        answ.innerHTML = this.state.answer;
+
+        const msg = document.createElement('h2');
+        msg.classList.add('main__modal__msg');
+        switch (status) {
+            case 0:
+                msg.innerHTML = 'Oh, sorry! You lose. Try again!'
+                break;
+            case 1:
+                msg.innerHTML = 'Congratulation! You win. Try more!'
+                break;
+        }
+
+        modal.append(msg, answ, buttonGE)
+        modalOverlay.append(modal)
+        document.body.classList.add('show-modal')
+        document.body.append(modalOverlay)
     }
 }
 
