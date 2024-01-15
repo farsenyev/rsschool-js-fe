@@ -9,15 +9,9 @@ class Gallow {
         const gallowContainer = document.createElement('section');
         gallowContainer.classList.add('gallow__container');
 
-        const imgContainer = document.createElement('div');
-        imgContainer.classList.add('gallow__img-container');
-
         this.createHtml(gallowContainer);
 
-
-
         this.gallow = gallowContainer;
-        this.gallow.append(imgContainer);
 
     }
 

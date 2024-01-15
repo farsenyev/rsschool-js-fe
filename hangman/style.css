@@ -1,11 +1,10 @@
-.main__container{
+.main__container {
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr;
     grid-template-areas:
     "gallow qa"
     "gallow keyboard";
-    /*max-width: 1000px;*/
 }
 
 .qa__container{
@@ -45,9 +44,13 @@
 
 .gallow__container{
     grid-area: gallow;
+    height: 550px;
 }
 .gallow__img{
     height: 350px;
+}
+.gallow__name{
+    text-align: center;
 }
 
 .show-modal{
@@ -79,39 +82,108 @@
     justify-content: space-around;
     align-items: center;
 }
+.main__modal__msg{
+    text-align: center;
+}
+
+.gallow__img__container{
+    z-index: 2;
+    position: relative;
+    left: 105px;
+    top: -300px;
+    width: 150px;
+    height: 400px;
+}
 
 .img__head{
-    position: absolute;
-    left: 140px;
-    top: 135px;
+    z-index: 2;
+    position: relative;
+    left: 22px;
+    top: 0px;
 }
 
 .img__body{
-    position: absolute;
-    left: 188px;
-    top: 232px;
+    z-index: 1;
+    position: relative;
+    left: -30px;
+    top: 100px;
 }
 
 .img__hand-one{
-    position: absolute;
-    left: 125px;
-    top: 245px;
+    position: relative;
+    left: 10px;
+    top: 10px;
 }
 
 .img__hand-two{
-    position: absolute;
-    left: 188px;
-    top: 245px;
+    position: relative;
+    left: 2px;
+    top: 10px;
 }
 
 .img__leg-one{
-    position: absolute;
-    left: 125px;
-    top: 355px;
+    position: relative;
+    left: 10px;
+    top: 6px;
 }
 
 .img__leg-two{
-    position: absolute;
-    left: 188px;
-    top: 355px;
+    position: relative;
+    left: 2px;
+    top: 6px;
 }
+
+@media screen and (min-width: 1440px){
+    body{
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+}
+
+@media screen and (min-width: 768px) and (max-width: 1439px){
+    body{
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .main__modal{
+        width: 70%;
+        height: 45%;
+    }
+    .qa__quest{
+        width: 450px;
+    }
+    .keyboard__container{
+        width: 450px;
+    }
+
+}
+
+@media screen and (min-width: 360px) and (max-width: 767px){
+    body{
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .main__container {
+        display: grid;
+        grid-template-rows: 1fr;
+        /*grid-template-columns: 1fr;*/
+        grid-template-areas:
+            "gallow"
+            "qa"
+            "keyboard";
+    }
+    .qa__container{
+        height: 250px;
+    }
+    .keyboard__container{
+        width: 300px;
+    }
+    .main__modal{
+        width: 70%;
+        height: 45%;
+    }
+}
+
+@media screen and  (max-width: 359px){}

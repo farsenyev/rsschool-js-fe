@@ -11,6 +11,7 @@ class Hangman {
         this.gallow = null;
         this.qa = null;
         this.keyboard = null;
+        this.imgCon = null;
         this.state = {
             lastQuestIndex: '',
             answer: '',
@@ -53,37 +54,37 @@ class Hangman {
                 const img = document.createElement('img');
                 img.classList.add('img__head');
                 img.src = '../assets/head.svg';
-                this.gallow.getHtml().prepend(img)
+                this.imgCon.append(img)
                 break;
             case 2:
                 const img2 = document.createElement('img');
                 img2.classList.add('img__body');
                 img2.src = '../assets/body.svg';
-                this.gallow.getHtml().prepend(img2)
+                this.imgCon.append(img2)
                 break;
             case 3:
                 const img3 = document.createElement('img');
                 img3.classList.add('img__hand-one');
                 img3.src = '../assets/hand-one.svg';
-                this.gallow.getHtml().prepend(img3)
+                this.imgCon.append(img3)
                 break;
             case 4:
                 const img4 = document.createElement('img');
                 img4.classList.add('img__hand-two');
                 img4.src = '../assets/hand-two.svg';
-                this.gallow.getHtml().prepend(img4)
+                this.imgCon.append(img4)
                 break;
             case 5:
                 const img5 = document.createElement('img');
                 img5.classList.add('img__leg-one');
                 img5.src = '../assets/leg-one.svg';
-                this.gallow.getHtml().append(img5)
+                this.imgCon.append(img5)
                 break;
             case 6:
                 const img6 = document.createElement('img');
                 img6.classList.add('img__leg-two');
                 img6.src = '../assets/leg-two.svg';
-                this.gallow.getHtml().prepend(img6)
+                this.imgCon.append(img6)
                 break;
         }
     }
@@ -176,6 +177,10 @@ class Hangman {
         this.gallow = new Gallow();
         this.qa = new QaModule(this.data, this.state);
         this.keyboard = new Keyboard(this.state);
+
+        this.imgCon = document.createElement('div');
+        this.imgCon.classList.add('gallow__img__container');
+        this.gallow.getHtml().append(this.imgCon)
 
         this.container.append(this.gallow.getHtml());
         this.container.append(this.qa.getHTML());
