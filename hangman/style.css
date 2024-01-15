@@ -186,4 +186,30 @@
     }
 }
 
-@media screen and  (max-width: 359px){}
+@media screen and  (max-width: 359px){
+    body{
+        max-width: 200px;
+        margin: 0 auto;
+    }
+
+    .main__container {
+        display: grid;
+        grid-template-rows: 1fr;
+        /*grid-template-columns: 1fr;*/
+        grid-template-areas:
+            "gallow"
+            "qa"
+            "keyboard";
+        height: 500px;
+    }
+    .qa__container{
+        height: 250px;
+    }
+    .keyboard__container{
+        width: 150px;
+    }
+    .main__modal{
+        width: 70%;
+        height: 45%;
+    }
+}
