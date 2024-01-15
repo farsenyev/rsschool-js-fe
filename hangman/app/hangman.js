@@ -25,10 +25,10 @@ class Hangman {
         this.container = document.createElement('main');
         this.container.classList.add('main__container');
 
-        document.addEventListener('keyup', (event) => {this.clickHandler(event)});
+
         document.addEventListener('gameEnd', (event) => {this.gameEnd(event.detail)});
         document.addEventListener('wrong', () => {this.wrongHandler()});
-        document.addEventListener('drawMan', ()=>{this.draw()})
+        document.addEventListener('drawMan', () => {this.draw()});
         document.addEventListener('correct', (event) => {this.showLetter(event)});
         document.addEventListener('removeButton', (event) => {this.disableButton(event.detail)});
 
@@ -41,8 +41,9 @@ class Hangman {
         document.dispatchEvent(event)
         document.querySelectorAll('.qa__counter')[0].innerHTML = `${this.state.incorrectCounter}/6`;
         if (this.state.incorrectCounter >= 6){
-                const event = new CustomEvent('gameEnd', {detail: 0});
-                document.dispatchEvent(event);
+            // document.removeEventListener('keyup', ()=>{})
+            const event = new CustomEvent('gameEnd', {detail: 0});
+            document.dispatchEvent(event);
         }
     }
 
@@ -132,6 +133,7 @@ class Hangman {
     }
 
     gameEnd(status){
+        document.removeEventListener('keyup', this.clickHandler);
         const modal = document.createElement('section');
         modal.classList.add('main__modal');
 
@@ -179,6 +181,8 @@ class Hangman {
         this.container.append(this.qa.getHTML());
         this.container.append(this.keyboard.getHTML());
         this.parent.append(this.container);
+        this.clickHandler = this.clickHandler.bind(this)
+        document.addEventListener('keyup', this.clickHandler);
     }
 
     clear(){
