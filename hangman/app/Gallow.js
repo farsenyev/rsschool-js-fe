@@ -18,7 +18,7 @@ class Gallow {
     createHtml(parent){
         let mainImg = document.createElement('img');
         mainImg.classList.add('gallow__img');
-        mainImg.src = '../assets/gallows.svg';
+        mainImg.src = './assets/gallows.svg';
         mainImg.alt = 'gallow';
 
         let name = document.createElement('h1');
