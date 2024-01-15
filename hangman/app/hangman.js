@@ -53,37 +53,37 @@ class Hangman {
             case 1:
                 const img = document.createElement('img');
                 img.classList.add('img__head');
-                img.src = '../assets/head.svg';
+                img.src = './assets/head.svg';
                 this.imgCon.append(img)
                 break;
             case 2:
                 const img2 = document.createElement('img');
                 img2.classList.add('img__body');
-                img2.src = '../assets/body.svg';
+                img2.src = './assets/body.svg';
                 this.imgCon.append(img2)
                 break;
             case 3:
                 const img3 = document.createElement('img');
                 img3.classList.add('img__hand-one');
-                img3.src = '../assets/hand-one.svg';
+                img3.src = './assets/hand-one.svg';
                 this.imgCon.append(img3)
                 break;
             case 4:
                 const img4 = document.createElement('img');
                 img4.classList.add('img__hand-two');
-                img4.src = '../assets/hand-two.svg';
+                img4.src = './assets/hand-two.svg';
                 this.imgCon.append(img4)
                 break;
             case 5:
                 const img5 = document.createElement('img');
                 img5.classList.add('img__leg-one');
-                img5.src = '../assets/leg-one.svg';
+                img5.src = './assets/leg-one.svg';
                 this.imgCon.append(img5)
                 break;
             case 6:
                 const img6 = document.createElement('img');
                 img6.classList.add('img__leg-two');
-                img6.src = '../assets/leg-two.svg';
+                img6.src = './assets/leg-two.svg';
                 this.imgCon.append(img6)
                 break;
         }
