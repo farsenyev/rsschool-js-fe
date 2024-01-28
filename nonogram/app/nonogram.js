@@ -15,7 +15,6 @@ class Nonogram {
         container.classList.add('main')
 
         this.pix = new Matrix(this.data[0/*random number, depends in difficulty*/].path, this.handleCreate.bind(this));
-
     }
 
     handleCreate(){

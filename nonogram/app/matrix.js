@@ -48,9 +48,7 @@ class Matrix{
         this.onCreate()//callback
     }
 
-    onCreate(){
-
-    }
+    onCreate(){}
 }
 
 export default Matrix
