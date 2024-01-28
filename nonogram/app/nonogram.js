@@ -1,9 +1,11 @@
 import Matrix from "./matrix.js";
+import Draw from "./draw.js";
 
 class Nonogram {
     constructor(parent, data) {
         this.data = data;
         this.parent = parent;
+        this.pix = null;
 
         this.init()
     }
@@ -12,12 +14,15 @@ class Nonogram {
         const container = document.createElement('main')
         container.classList.add('main')
 
-        const matrix = new Matrix(/*random number, depends in difficulty*/0, this.data).getMatrix()
+        this.pix = new Matrix(this.data[0/*random number, depends in difficulty*/].path, this.handleCreate.bind(this));
 
-        const layout = new Draw(matrix)
+    }
 
-        this.parent.append(layout)
+    handleCreate(){
+        console.log(this.pix.matrix)
+        const layout = new Draw(this.pix.matrix)
 
+        this.parent.append(layout.getHtml())
     }
 
 }
