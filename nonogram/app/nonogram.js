@@ -7,6 +7,7 @@ class Nonogram {
         this.parent = parent;
         this.pix = null;
         this.container = null;
+        this.timerNumbers = null;
 
         this.init()
     }
@@ -23,6 +24,7 @@ class Nonogram {
     handleCreate(){
         console.log(this.pix.matrix)
         const layout = new Draw(this.pix.matrix, this.modalHandler.bind(this))
+        this.timerNumbers = layout.getTime()
 
         this.container.append(layout.getHtml())
 
@@ -36,8 +38,7 @@ class Nonogram {
         modalOverlay.classList.add('modal-overlay');
 
         const time = document.createElement('h4');
-        // time = this.timerNumber;
-
+        time.textContent = this.timerNumbers.textContent;
         time.classList.add('modal__timer');
 
         const txt = document.createElement('h2');

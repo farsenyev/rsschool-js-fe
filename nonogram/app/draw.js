@@ -1,5 +1,8 @@
+import Timer from "./controls.js";
+
 class Draw{
     constructor(matrix, modalHandler) {
+        this.timer = null;
         this.matrix = matrix;
         this.answer = new Array(matrix.length);
         this.container = null;
@@ -12,7 +15,9 @@ class Draw{
     init(){
         this.createHtml()
         this.answer = Array.from(Array(this.matrix.length), () => {return new Array(this.matrix.length).fill(0)})
-        console.log(this.answer)
+        this.timer = new Timer(this.timer)
+        this.container.append(this.timer.getHTML())
+        this.timer.startTimer()
     }
 
     createHtml(){
@@ -96,6 +101,11 @@ class Draw{
 
         let target = event.target
         target.innerHTML = 'X'
+        const id = target.getAttribute('id').split('/')
+        const x = id[0]
+        const y = id[1]
+        target.classList.remove('black')
+        this.answer[x][y] = 0
     }
 
     clickHandler(event){
@@ -132,12 +142,17 @@ class Draw{
         }
         // return true, and show congratulations
         this.modals()
+        this.timer.stop()
     }
 
     modals(){}
 
     getHtml(){
         return this.container
+    }
+
+    getTime(){
+        return this.timer.getTimer()
     }
 }
 

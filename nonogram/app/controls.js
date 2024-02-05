@@ -3,68 +3,70 @@ class Timer{
         this.container = null;//container
         this.nums = null;//h4 for display timer
         this.timer = timer;//timer
-        this.run = false;//check if runs
-        this.start = 0;//startTime
-        this.countedTime = 0;//elapsed
-        this.init()
+        this.isRunning = false;//check if runs
+        this.start = null;//startTime
+        this.elapsed = 0;//elapsed
+        this.init();
     }
 
     init(){
         this.container = document.createElement('section');
-        this.nums = document.createElement('h4')
+        this.nums = document.createElement('h4');
+        this.container.classList.add('timer__container');
+        this.nums.classList.add('timer__numbers');
 
-        this.container.append(this.nums)
+        this.container.append(this.nums);
     }
 
-    startTimer(){
-        if (!this.run){
-            this.run = true;
-            this.start = Date.now() -this.countedTime;
-            this.updateTimeOut();
+    getHTML(){
+        return this.container;
+    }
+
+    getTimer(){
+        return this.nums;
+    }
+
+
+    startTimer() {
+        if (!this.isRunning) {
+            this.isRunning = true;
+            this.start = Date.now() - this.elapsed;
+            this.updateTime();
         }
     }
 
     stop() {
-        if (this.run) {
-            this.run = false;
+        if (this.isRunning) {
+            this.isRunning = false;
             clearTimeout(this.timer);
         }
     }
 
     resetStopwatch() {
         this.stop();
-        this.countedTime = 0;
-        this.updateHtml();
+        this.elapsed = 0;
+        this.updateHTML();
     }
 
-    updateTimeOut(){
-        this.update();
-        this.timer = setTimeout(this.updateTimeOut, 1000)
+    updateTime() {
+        console.log('time')
+        this.elapsed = Date.now() - this.start;
+        this.updateHTML();
+        this.timer = setTimeout( () => this.updateTime(), 1000);
     }
 
-    update(){
-        this.countedTime = Date.now() - this.start
-        this.updateHtml()
-    }
+    // updateTimeout() {
+    //     console.log('timeout')
+    //     this.updateTime(); //type error is not a function at 2 iteration
+    //     this.timer = setTimeout(this.updateTimeout, 1000);
+    // }
 
-    updateHtml() {
-        const minutes = Math.floor(this.start / 60000);
-        const seconds = Math.floor((this.start % 60000) / 1000);
+    updateHTML() {
+        const minutes = Math.floor(this.elapsed / 60000);
+        const seconds = Math.floor((this.elapsed % 60000) / 1000);
 
-        // document.getElementById('stopwatch')
         this.nums.textContent = `${minutes}:${(seconds < 10 ? '0' : '')}${seconds}`;
-    }
-
-    stopStopwatch() {
-        if (this.run) {
-            this.run = false;
-            clearTimeout(this.timer);
-        }
-    }
-
-    getHTML(){
-        return this.container
     }
 }
 
-export default Timer
+export default Timer;
