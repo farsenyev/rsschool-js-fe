@@ -58,6 +58,10 @@ const data = [
     {
         'path': './pixels/skeleton.png',
         'difficulty': 'hard'
+    },
+    {
+        'path': './pixels/crown.png',
+        'difficulty': 'hard'
     }
 ]
 

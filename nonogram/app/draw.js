@@ -1,41 +1,47 @@
 class Draw{
-    constructor(matrix) {
+    constructor(matrix, modalHandler) {
         this.matrix = matrix;
+        this.answer = new Array(matrix.length);
         this.container = null;
         this.rowsNum = null;
         this.colsNum = null;
+        this.modals = modalHandler;
         this.init()
     }
 
     init(){
         this.createHtml()
+        this.answer = Array.from(Array(this.matrix.length), () => {return new Array(this.matrix.length).fill(0)})
+        console.log(this.answer)
     }
 
     createHtml(){
-        this.container = document.createElement('table');
+        this.container = document.createElement('section');
         this.container.classList.add('matrix__container');
         this.container.style.border = '1px solid black'
         this.addNumbers()
 
         this.container.prepend(this.rowsNum, this.colsNum)
+        const table = document.createElement('table')
+        table.classList.add('matrix__table')
         for (let row in this.matrix){
             const tableRow = document.createElement('tr')
             tableRow.classList.add('table__row')
             for (let col in this.matrix[row]){
                 const sq = document.createElement('td');
                 sq.classList.add('matrix__field');
-                sq.classList.add('field__' + this.matrix[row][col])
-                sq.style.width = '20px'
-                sq.style.height = '20px'
+                // sq.classList.add('field__' + this.matrix[row][col])
 
+                sq.id = `${row}/${col}`
                 // sq.innerHTML = this.matrix[row][col]
+                sq.addEventListener('click', this.clickHandler.bind(this))
                 sq.addEventListener('contextmenu', this.ctxMenuHandler.bind(this))
                 tableRow.append(sq)
             }
-        this.container.append(tableRow)
+        table.append(tableRow)
         }
 
-
+        this.container.append(table)
     }
 
     addNumbers(){
@@ -87,17 +93,48 @@ class Draw{
 
     ctxMenuHandler(event){
         event.preventDefault()
-        let div = document.createElement('div');
-        div.classList.add('ctx__menu')
 
-        //option for choice to X or fill black
         let target = event.target
-        if (target.classList.contains('field__1')){
-            target.style.background = 'red'
-        }else{
-            target.style.background = 'blue'
-        }
+        target.innerHTML = 'X'
     }
+
+    clickHandler(event){
+        let target = event.target
+        target.innerHTML = ''
+        const id = target.getAttribute('id').split('/')
+        const x = id[0]
+        const y = id[1]
+
+        if (!target.classList.contains('black')){
+            target.classList.add('black')
+            console.log('set 1')
+            this.answer[x][y] = 1
+        }else{
+            target.classList.remove('black')
+            this.answer[x][y] = 0
+        }
+        this.checkArrays()
+    }
+
+    checkArrays(){
+        this.gameEnd()
+
+    }
+
+    gameEnd(){
+        console.log(this.matrix, this.answer)
+        for (let i = 0; i < this.matrix.length; i++){
+            for (let j = 0; j < this.matrix[i].length; j++){
+                if (this.matrix[i][j] !== this.answer[i][j]){
+                    return false
+                }
+            }
+        }
+        // return true, and show congratulations
+        this.modals()
+    }
+
+    modals(){}
 
     getHtml(){
         return this.container

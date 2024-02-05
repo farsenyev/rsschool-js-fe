@@ -44,7 +44,7 @@ class Matrix{
         this.getMatrix(this.matrix)
     }
 
-    getMatrix(a){
+    getMatrix(){
         this.onCreate()//callback
     }
 
