@@ -17,7 +17,6 @@ class Draw{
         this.answer = Array.from(Array(this.matrix.length), () => {return new Array(this.matrix.length).fill(0)})
         this.timer = new Timer(this.timer)
         this.container.append(this.timer.getHTML())
-        this.timer.startTimer()
     }
 
     createHtml(){
@@ -99,6 +98,8 @@ class Draw{
     ctxMenuHandler(event){
         event.preventDefault()
 
+        if (!this.timer.isRun()) this.timer.startTimer()
+
         let target = event.target
         target.innerHTML = 'X'
         const id = target.getAttribute('id').split('/')
@@ -109,6 +110,8 @@ class Draw{
     }
 
     clickHandler(event){
+
+        if (!this.timer.isRun()) this.timer.startTimer()
         let target = event.target
         target.innerHTML = ''
         const id = target.getAttribute('id').split('/')

@@ -26,6 +26,9 @@ class Timer{
         return this.nums;
     }
 
+    isRun(){
+        return this.isRunning
+    }
 
     startTimer() {
         if (!this.isRunning) {

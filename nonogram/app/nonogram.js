@@ -1,11 +1,14 @@
 import Matrix from "./matrix.js";
 import Draw from "./draw.js";
+import Menu from "./menu.js";
 
 class Nonogram {
     constructor(parent, data) {
         this.data = data;
         this.parent = parent;
         this.pix = null;
+        this.menu = null;
+        this.picture = 0;
         this.container = null;
         this.timerNumbers = null;
 
@@ -15,17 +18,49 @@ class Nonogram {
     init(){
         this.container = document.createElement('main')
         this.container.classList.add('main')
+        this.menu = new Menu(this.data)
+        this.start()
+    }
 
-        this.pix = new Matrix(this.data[0/*random number, depends in difficulty*/].path, this.handleCreate.bind(this));
+    start(){
+        this.createMenuBtn()
+
+        this.container.append(this.menu.getHTML())
+        this.menuEventHandler()
 
         this.parent.append(this.container)
     }
 
+    createMenuBtn(){
+        const menuBtn = document.createElement('button');
+        menuBtn.classList.add('menu__btn');
+        menuBtn.innerHTML = 'Menu'
+
+        menuBtn.addEventListener('click',()=> {
+            this.container.innerHTML = '';
+            this.start()
+        })
+        this.container.append(menuBtn)
+    }
+
+    menuEventHandler(){
+        const menuEls = document.getElementsByClassName('menu__el')
+        document.addEventListener('DOMContentLoaded', ()=>{
+            for (let i = 0; i < menuEls.length; i++){
+                menuEls[i].addEventListener('click', ()=>{
+                    this.pix = new Matrix(this.data[i/*random number, depends in difficulty*/].path, this.handleCreate.bind(this));
+                })
+            }
+        })
+    }
+
     handleCreate(){
-        console.log(this.pix.matrix)
+
         const layout = new Draw(this.pix.matrix, this.modalHandler.bind(this))
         this.timerNumbers = layout.getTime()
 
+        this.container.innerHTML = ''
+        this.createMenuBtn()
         this.container.append(layout.getHtml())
 
     }
