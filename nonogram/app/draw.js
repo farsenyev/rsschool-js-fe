@@ -13,16 +13,20 @@ class Draw{
     }
 
     init(){
-        this.createHtml()
+
         this.answer = Array.from(Array(this.matrix.length), () => {return new Array(this.matrix.length).fill(0)})
         this.timer = new Timer(this.timer)
-        this.container.append(this.timer.getHTML())
-    }
 
-    createHtml(){
         this.container = document.createElement('section');
         this.container.classList.add('matrix__container');
         this.container.style.border = '1px solid black'
+
+        this.createHtml()
+
+    }
+
+    createHtml(){
+        this.container.append(this.timer.getHTML())
         this.addNumbers()
 
         this.container.prepend(this.rowsNum, this.colsNum)
@@ -34,10 +38,8 @@ class Draw{
             for (let col in this.matrix[row]){
                 const sq = document.createElement('td');
                 sq.classList.add('matrix__field');
-                // sq.classList.add('field__' + this.matrix[row][col])
 
                 sq.id = `${row}/${col}`
-                // sq.innerHTML = this.matrix[row][col]
                 sq.addEventListener('click', this.clickHandler.bind(this))
                 sq.addEventListener('contextmenu', this.ctxMenuHandler.bind(this))
                 tableRow.append(sq)
@@ -45,7 +47,18 @@ class Draw{
         table.append(tableRow)
         }
 
-        this.container.append(table)
+        const resetBtn = document.createElement('button');
+        resetBtn.classList.add('matrix__reset-btn');
+        resetBtn.innerHTML = 'Reset'
+        resetBtn.addEventListener('click', this.resetGame.bind(this))
+        this.container.append(resetBtn, table)
+    }
+
+    resetGame(){
+        this.container.innerHTML = '';
+        this.answer = Array.from(Array(this.matrix.length), () => {return new Array(this.matrix.length).fill(0)})
+        this.createHtml()
+        this.timer.reset()
     }
 
     addNumbers(){

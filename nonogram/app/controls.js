@@ -45,7 +45,7 @@ class Timer{
         }
     }
 
-    resetStopwatch() {
+    reset() {
         this.stop();
         this.elapsed = 0;
         this.updateHTML();
