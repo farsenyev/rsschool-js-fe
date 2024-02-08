@@ -24,11 +24,25 @@ class Nonogram {
 
     start(){
         this.createMenuBtn()
+        this.createRandomGameBtn()
 
         this.container.append(this.menu.getHTML())
         this.menuEventHandler()
 
         this.parent.append(this.container)
+    }
+
+    createRandomGameBtn(){
+        const randomBtn = document.createElement('button');
+        randomBtn.classList.add('random__btn');
+        randomBtn.innerHTML = 'Random game'
+
+        randomBtn.addEventListener('click', ()=> {
+            const randomNumber = Math.floor(Math.random() * this.data.length)
+            this.pix = new Matrix(this.data[randomNumber/*random number, depends in difficulty*/].path, this.handleCreate.bind(this));
+        })
+
+        this.container.append(randomBtn)
     }
 
     createMenuBtn(){
