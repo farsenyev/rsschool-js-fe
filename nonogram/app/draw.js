@@ -51,7 +51,12 @@ class Draw{
         resetBtn.classList.add('matrix__reset-btn');
         resetBtn.innerHTML = 'Reset'
         resetBtn.addEventListener('click', this.resetGame.bind(this))
-        this.container.append(resetBtn, table)
+
+        const hintBtn = document.createElement('button');
+        hintBtn.classList.add('matrix__hint-btn');
+        hintBtn.innerHTML = 'Hint'
+        hintBtn.addEventListener('click', this.hintHandler.bind(this))
+        this.container.append(resetBtn, hintBtn, table)
     }
 
     resetGame(){
@@ -59,6 +64,23 @@ class Draw{
         this.answer = Array.from(Array(this.matrix.length), () => {return new Array(this.matrix.length).fill(0)})
         this.createHtml()
         this.timer.reset()
+    }
+
+    hintHandler(){
+        for (let i = 0; i < this.matrix.length; i++){
+            for (let j = 0; j < this.matrix[i].length; j++){
+                const el = document.getElementById(`${i}/${j}`);
+                if (this.matrix[i][j] === 0){
+                    if (el.classList.contains('black')){
+                        el.classList.remove('black')
+                    }
+                }else{
+                    if (!el.classList.contains('black')){
+                        el.classList.add('black')
+                    }
+                }
+            }
+        }
     }
 
     addNumbers(){
