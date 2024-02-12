@@ -1,5 +1,5 @@
 **link to Youtube**
-
+https://youtu.be/YzevVqaDo-o?si=3U-JeEiIrw0d63Hx
 
 **transcript**
 Hello, I'm Ted, a 21-year-old soon-to-be graduate of Saint Petersburg University of Telecommunication. 
