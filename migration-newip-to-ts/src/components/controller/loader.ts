@@ -1,3 +1,5 @@
+import {ViewItem} from "../view/appView";
+
 class Loader {
     private baseLink: string;
     private options: Record<string, string>;
@@ -9,7 +11,7 @@ class Loader {
 
     getResp(
         { endpoint, options = {} }: { endpoint: string; options?: Record<string, string> },
-        callback = () => {
+        callback: (data: ViewItem)  => void = () => {
             console.error('No callback for GET response');
         }
     ): void {
@@ -37,7 +39,7 @@ class Loader {
         return url.slice(0, -1);
     }
 
-    load(method: string, endpoint: string, callback: (data: unknown) => void, options: Record<string, string> = {}) {
+    load(method: string, endpoint: string, callback: (data: ViewItem) => void, options: Record<string, string> = {}) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
