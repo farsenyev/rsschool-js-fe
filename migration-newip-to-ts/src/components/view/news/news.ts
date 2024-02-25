@@ -1,6 +1,6 @@
 import './news.css';
 
-interface NewsItem {
+export interface NewsItem {
     author: string | null;
     source: {
         name: string;

@@ -1,6 +1,6 @@
 import './sources.css';
 
-interface SourceItem {
+export interface SourceItem {
     id: string;
     name: string;
 }
