@@ -1,8 +1,8 @@
 import {ViewItem} from "../view/appView";
 
 class Loader {
-    private baseLink: string;
-    private options: Record<string, string>;
+    private readonly baseLink: string;
+    private readonly options: Record<string, string>;
 
     constructor(baseLink: string, options: Record<string, string>) {
         this.baseLink = baseLink;
