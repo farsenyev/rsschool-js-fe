@@ -1,21 +1,21 @@
 class Login {
-  parent: HTMLElement;
-  loginContainer: HTMLDivElement | null;
+  onCreate: Function;
+  loginContainer: HTMLElement | null;
   inputName: HTMLInputElement | null;
   inputSurname: HTMLInputElement | null;
   submitButton!: HTMLButtonElement;
 
-  constructor(parent: HTMLElement) {
-    this.parent = parent;
+  constructor(callback: Function) {
     this.loginContainer = null;
     this.inputName = null;
     this.inputSurname = null;
+    this.onCreate = callback;
 
     this.init();
   }
 
   init() {
-    this.loginContainer = document.createElement("div");
+    this.loginContainer = document.createElement("section");
     this.loginContainer.classList.add("login-container");
     this.createForm();
   }
@@ -46,7 +46,6 @@ class Login {
         this.inputSurname,
         this.submitButton,
       );
-      this.parent.append(this.loginContainer);
     }
 
     this.inputName.addEventListener("input", () => this.validateForm());
@@ -92,7 +91,11 @@ class Login {
 
     exist.push(data);
     localStorage.setItem("UserData", JSON.stringify(exist));
-    return true;
+    this.onCreate();
+  }
+
+  getHtml(): Node {
+    return this.loginContainer as Node;
   }
 }
 

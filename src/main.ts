@@ -1,5 +1,6 @@
 import "./style.css";
-import Login from "./login/login";
+import Puzzle from "./classes";
+import data from "./app/data";
 
 const body: HTMLElement = document.body;
-const login = new Login(body); // eslint-disable-line
+const puzzle = new Puzzle(body, data); // eslint-disable-line
