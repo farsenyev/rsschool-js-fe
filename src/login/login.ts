@@ -48,6 +48,23 @@ class Login {
       );
       this.parent.append(this.loginContainer);
     }
+
+    this.inputName.addEventListener("input", () => this.validateForm());
+    this.inputName.addEventListener("blur", () => this.validateForm());
+    this.inputSurname.addEventListener("input", () => this.validateForm());
+    this.inputSurname.addEventListener("blur", () => this.validateForm());
+  }
+
+  validateForm() {
+    const name = (this.inputName as HTMLInputElement).value.trim();
+    const surname = (this.inputSurname as HTMLInputElement).value.trim();
+
+    this.submitButton.disabled = !(
+      name &&
+      surname &&
+      this.validateName(name) &&
+      this.validateSurName(surname)
+    );
   }
 
   handleSubmit() {
@@ -57,6 +74,14 @@ class Login {
     surName.trim();
 
     this.submitButton.disabled = !(firstName && surName);
+  }
+
+  validateName(name: string) {
+    return /^[A-Z][a-zA-Z-]{2,}$/.test(name);
+  }
+
+  validateSurName(surname: string) {
+    return /^[A-Z][a-zA-Z-]{3,}$/.test(surname);
   }
 }
 
