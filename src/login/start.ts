@@ -1,5 +1,3 @@
-import { l } from "vite/dist/node/types.d-FdqQ54oU";
-
 class Start {
   container: HTMLElement | null;
   toLoadPage: Function;
