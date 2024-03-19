@@ -68,12 +68,11 @@ class Login {
   }
 
   handleSubmit() {
-    const firstName = (this.inputName as HTMLInputElement).value;
-    firstName.trim();
-    const surName = (this.inputSurname as HTMLInputElement).value;
-    surName.trim();
-
-    this.submitButton.disabled = !(firstName && surName);
+    const name = (this.inputName as HTMLInputElement).value;
+    name.trim();
+    const surname = (this.inputSurname as HTMLInputElement).value;
+    surname.trim();
+    this.saveData({ name, surname });
   }
 
   validateName(name: string) {
@@ -82,6 +81,18 @@ class Login {
 
   validateSurName(surname: string) {
     return /^[A-Z][a-zA-Z-]{3,}$/.test(surname);
+  }
+
+  saveData(data: { name: string; surname: string }) {
+    let exist: { name: string; surname: string }[] = [];
+    const dataJSON = localStorage.getItem("UserData");
+    if (dataJSON) exist = JSON.parse(dataJSON);
+
+    if (!Array.isArray(exist)) exist = [];
+
+    exist.push(data);
+    localStorage.setItem("UserData", JSON.stringify(exist));
+    return true;
   }
 }
 
