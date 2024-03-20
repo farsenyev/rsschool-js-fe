@@ -1,6 +1,6 @@
 import Login from "./login/login";
 import Start from "./login/start";
-import { b } from "vite/dist/node/types.d-FdqQ54oU";
+import Game from "./app/game";
 
 // interface Data {
 //     rounds: Array<{
@@ -20,17 +20,15 @@ class Puzzle {
   parent: HTMLElement | null;
   data: object;
   login: Login | null;
-  loginBtn: HTMLElement | null;
   start: Start | null;
-  startBtn: HTMLElement | null;
+  game: Game | null;
 
   constructor(parent: HTMLElement, data: object) {
     this.parent = parent;
     this.data = data;
     this.login = null;
-    this.loginBtn = null;
     this.start = null;
-    this.startBtn = null;
+    this.game = null;
 
     this.init();
   }
@@ -61,7 +59,12 @@ class Puzzle {
   }
 
   loadGame() {
-    console.log("woooooork");
+    const parentElement: HTMLElement | null = this.parent;
+    if (parentElement) {
+      parentElement.innerHTML = "";
+      this.game = new Game(this.data.rounds[0]);
+      this.parent?.append(this.game.getHtml());
+    }
   }
 }
 

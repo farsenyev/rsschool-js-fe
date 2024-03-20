@@ -10,7 +10,6 @@ interface level {
 }
 
 class Game {
-  parent: HTMLElement | null;
   level: level;
   sentences: Array<object>;
   answer: Array<string>;
@@ -18,8 +17,7 @@ class Game {
   con: HTMLElement | null;
   answerCon: HTMLElement | null;
 
-  constructor(parent: HTMLElement, level: level) {
-    this.parent = parent;
+  constructor(level: level) {
     this.level = level;
 
     this.con = null;
@@ -70,21 +68,30 @@ class Game {
       this.con?.append(wordContainer);
       i++;
     });
-
-    this.parent?.append(this.con);
   }
 
-  clickHandler(event) {
-    const target = event.target;
+  clickHandler(event: Event): void {
+    const target = event.target as HTMLElement;
     if (target.parentElement === this.answerCon) {
       target.remove();
-      document.getElementById(`word-con-${this.round}`).append(target);
+      const containerForWord: HTMLElement | null = document.getElementById(
+        `word-con-${this.round}`,
+      );
+      if (containerForWord) {
+        containerForWord.append(target);
+      }
       const indexInAnswer = this.answer.indexOf(target.innerHTML);
-      this.answer.splice(indexInAnswer, 1);
+      if (indexInAnswer !== -1) {
+        this.answer.splice(indexInAnswer, 1);
+      }
     } else {
       this.answer.push(target.innerHTML);
-      this.answerCon.append(target);
+      this.answerCon?.append(target);
     }
+  }
+
+  getHtml(): Node {
+    return this.con as Node;
   }
 }
 
