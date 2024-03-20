@@ -20,6 +20,7 @@ class Game {
   currentSentenceIndex: number;
   nextLvl: Function;
   controls: HTMLElement | null;
+  skipBtn: HTMLElement | null;
 
   constructor(level: level, callback) {
     this.level = level;
@@ -27,6 +28,7 @@ class Game {
     this.con = null;
     this.answerCon = null;
     this.checkBtn = null;
+    this.skipBtn = null;
     this.controls = null;
 
     this.sentences = [];
@@ -46,6 +48,7 @@ class Game {
         answer: sentence.textExample.split(" ") as Array<string>,
       });
     });
+    console.log(this.sentences);
     this.createHtml();
   }
 
@@ -63,16 +66,21 @@ class Game {
       this.checkAnswer(this.currentSentenceIndex),
     );
 
+    this.skipBtn = document.createElement("button");
+    this.skipBtn.classList.add("skip-btn");
+    this.skipBtn.innerHTML = "Auto-Complete";
+    this.skipBtn.addEventListener("click", () => this.skipHandler());
+
     this.controls = document.createElement("div");
     this.controls.classList.add("controls-con");
-    this.controls?.append(this.checkBtn);
+    this.controls?.append(this.skipBtn, this.checkBtn);
 
     this.con.append(this.answerCon, this.controls);
     this.sentences.forEach((sentence: object, i: number = 0) => {
       const wordContainer: HTMLElement = document.createElement("div");
       wordContainer.classList.add("word-container");
       wordContainer.setAttribute("id", `word-con-${i}`);
-      const words: Array<string> = sentence.answer;
+      const words: Array<string> = Array.from(sentence.answer);
       words
         .sort(() => Math.random() - 0.5)
         .forEach((word: string) => {
@@ -136,6 +144,35 @@ class Game {
         ) {
           alert(`word on ${i + 1} position is incorrect`);
         }
+      }
+    }
+  }
+
+  skipHandler(): void {
+    const words = Array.from(
+      this.answerCon.getElementsByTagName("div"),
+    ) as HTMLDivElement[];
+    words.forEach((w) => w.click());
+    const wordCon = document.getElementById(
+      `word-con-${this.currentSentenceIndex}`,
+    );
+    if (wordCon) {
+      const answers = this.sentences[this.currentSentenceIndex]?.answer || [];
+      console.log(this.sentences);
+      let elems = Array.from(
+        wordCon.getElementsByTagName("div"),
+      ) as HTMLDivElement[];
+      while (elems.length && answers.length) {
+        let search = answers.shift();
+        for (let i = 0; i < elems.length; i++) {
+          if (elems[i].innerHTML === search) {
+            elems[i].click();
+            break;
+          }
+        }
+        elems = Array.from(
+          wordCon.getElementsByTagName("div"),
+        ) as HTMLDivElement[];
       }
     }
   }
