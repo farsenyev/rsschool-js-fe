@@ -9,9 +9,14 @@ interface level {
   }>;
 }
 
+interface Sentence {
+  sentence: string;
+  answer: string[];
+}
+
 class Game {
   level: level;
-  sentences: Array<object>;
+  sentences: Sentence[] = [];
   answer: Array<string>;
   round: number;
   con: HTMLElement | null;
@@ -22,7 +27,7 @@ class Game {
   controls: HTMLElement | null;
   skipBtn: HTMLElement | null;
 
-  constructor(level: level, callback) {
+  constructor(level: level, callback: Function) {
     this.level = level;
 
     this.con = null;
@@ -44,8 +49,8 @@ class Game {
   dataStructure() {
     this.level.words.forEach((sentence) => {
       this.sentences.push({
-        sentence: sentence.textExample as string,
-        answer: sentence.textExample.split(" ") as Array<string>,
+        sentence: sentence.textExample,
+        answer: sentence.textExample.split(" ")
       });
     });
     console.log(this.sentences);
@@ -76,7 +81,7 @@ class Game {
     this.controls?.append(this.skipBtn, this.checkBtn);
 
     this.con.append(this.answerCon, this.controls);
-    this.sentences.forEach((sentence: object, i: number = 0) => {
+    this.sentences.forEach((sentence, i: number = 0) => {
       const wordContainer: HTMLElement = document.createElement("div");
       wordContainer.classList.add("word-container");
       wordContainer.setAttribute("id", `word-con-${i}`);
@@ -128,7 +133,7 @@ class Game {
     }
   }
 
-  checkAnswer(index) {
+  checkAnswer(index: number) {
     if (this.answer.join(" ") === this.sentences[index].sentence) {
       if (this.round < this.level.words.length - 1) {
         this.round++;
@@ -149,19 +154,12 @@ class Game {
   }
 
   skipHandler(): void {
-    const words = Array.from(
-      this.answerCon.getElementsByTagName("div"),
-    ) as HTMLDivElement[];
-    words.forEach((w) => w.click());
-    const wordCon = document.getElementById(
-      `word-con-${this.currentSentenceIndex}`,
-    );
+    const wordCon = document.getElementById(`word-con-${this.currentSentenceIndex}`);
     if (wordCon) {
+      const words = Array.from(wordCon.getElementsByTagName('div')) as HTMLDivElement[];
+      words.forEach((e: HTMLDivElement) => e.click());
       const answers = this.sentences[this.currentSentenceIndex]?.answer || [];
-      console.log(this.sentences);
-      let elems = Array.from(
-        wordCon.getElementsByTagName("div"),
-      ) as HTMLDivElement[];
+      let elems = Array.from(wordCon.getElementsByTagName('div')) as HTMLDivElement[];
       while (elems.length && answers.length) {
         let search = answers.shift();
         for (let i = 0; i < elems.length; i++) {
@@ -170,12 +168,11 @@ class Game {
             break;
           }
         }
-        elems = Array.from(
-          wordCon.getElementsByTagName("div"),
-        ) as HTMLDivElement[];
+        elems = Array.from(wordCon.getElementsByTagName('div')) as HTMLDivElement[];
       }
     }
   }
+
 
   showNextSentence(): void {
     this.currentSentenceIndex++;

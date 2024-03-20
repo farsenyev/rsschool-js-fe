@@ -2,29 +2,29 @@ import Login from "./login/login";
 import Start from "./login/start";
 import Game from "./app/game";
 
-// interface Data {
-//     rounds: Array<{
-//         words: Array<{
-//             audioExample: string;
-//             textExample: string;
-//             textExampleTranslate: string;
-//             id: number;
-//             word: string;
-//             wordTranslate: string;
-//         }>;
-//     }>,
-//     roundsCount: number;
-// }
+interface Data {
+    rounds: Array<{
+        words: Array<{
+            audioExample: string;
+            textExample: string;
+            textExampleTranslate: string;
+            id: number;
+            word: string;
+            wordTranslate: string;
+        }>;
+    }>,
+    roundsCount: number;
+}
 
 class Puzzle {
   parent: HTMLElement | null;
-  data: object;
+  data: Data;
   login: Login | null;
   start: Start | null;
   game: Game | null;
   round: number;
 
-  constructor(parent: HTMLElement, data: object) {
+  constructor(parent: HTMLElement, data: Data) {
     this.parent = parent;
     this.data = data;
     this.login = null;

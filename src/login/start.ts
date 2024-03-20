@@ -4,22 +4,27 @@ class Start {
   toGamePage: Function;
   name: string;
   surname: string;
+  userData: Array<{
+    name: string,
+    surname: string
+  }>
 
-  constructor(toLoadPage, toGamePage) {
+  constructor(toLoadPage: Function, toGamePage: Function) {
     this.container = null;
     this.toLoadPage = toLoadPage;
     this.toGamePage = toGamePage;
+    this.userData = [];
     this.name = "";
     this.surname = "";
     this.init();
   }
 
   init() {
-    const userData: object[] = JSON.parse(
+    this.userData = JSON.parse(
       <string>localStorage.getItem("UserData"),
     );
-    this.name = userData[userData.length - 1].name;
-    this.surname = userData[userData.length - 1].surname;
+    this.name = this.userData[this.userData.length - 1].name;
+    this.surname = this.userData[this.userData.length - 1].surname;
     this.createHtml();
   }
 
