@@ -16,16 +16,25 @@ class Game {
   round: number;
   con: HTMLElement | null;
   answerCon: HTMLElement | null;
+  checkBtn: HTMLElement | null;
+  currentSentenceIndex: number;
+  nextLvl: Function;
+  controls: HTMLElement | null;
 
-  constructor(level: level) {
+  constructor(level: level, callback) {
     this.level = level;
 
     this.con = null;
     this.answerCon = null;
+    this.checkBtn = null;
+    this.controls = null;
 
     this.sentences = [];
     this.answer = [];
     this.round = 0;
+    this.currentSentenceIndex = 0;
+
+    this.nextLvl = callback;
 
     this.dataStructure();
   }
@@ -47,7 +56,18 @@ class Game {
     this.answerCon = document.createElement("div");
     this.answerCon.classList.add("answer-container");
 
-    this.con.append(this.answerCon);
+    this.checkBtn = document.createElement("button");
+    this.checkBtn.classList.add("check-btn");
+    this.checkBtn.innerHTML = "Check";
+    this.checkBtn.addEventListener("click", () =>
+      this.checkAnswer(this.currentSentenceIndex),
+    );
+
+    this.controls = document.createElement("div");
+    this.controls.classList.add("controls-con");
+    this.controls?.append(this.checkBtn);
+
+    this.con.append(this.answerCon, this.controls);
     this.sentences.forEach((sentence: object, i: number = 0) => {
       const wordContainer: HTMLElement = document.createElement("div");
       wordContainer.classList.add("word-container");
@@ -64,7 +84,7 @@ class Game {
           sector.addEventListener("click", this.clickHandler.bind(this));
           wordContainer.append(sector);
         });
-      if (i > 0) wordContainer.classList.add("hide-word-con");
+      if (i > 0) wordContainer.style.display = "none";
       this.con?.append(wordContainer);
       i++;
     });
@@ -88,6 +108,42 @@ class Game {
       this.answer.push(target.innerHTML);
       this.answerCon?.append(target);
     }
+  }
+
+  checkAnswer(index) {
+    if (this.answer.join(" ") === this.sentences[index].sentence) {
+      if (this.round < this.level.words.length - 1) {
+        this.round++;
+        this.answer = [];
+        this.showNextSentence();
+      } else {
+        this.winLevel();
+      }
+    }
+  }
+
+  showNextSentence(): void {
+    this.currentSentenceIndex++;
+    if (this.checkBtn) {
+      this.checkBtn.innerHTML = "Check";
+    }
+    if (this.answerCon) {
+      this.answerCon.innerHTML = "";
+    }
+    const next = document.getElementById(`word-con-${this.round}`);
+    const prev = document.getElementById(`word-con-${this.round - 1}`);
+    if (next) {
+      next.style.display = "block";
+    }
+    if (prev) {
+      prev.style.display = "none";
+    }
+  }
+
+  winLevel() {
+    this.currentSentenceIndex = 0;
+    alert("You win!");
+    this.nextLvl();
   }
 
   getHtml(): Node {

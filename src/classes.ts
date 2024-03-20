@@ -22,6 +22,7 @@ class Puzzle {
   login: Login | null;
   start: Start | null;
   game: Game | null;
+  round: number;
 
   constructor(parent: HTMLElement, data: object) {
     this.parent = parent;
@@ -29,6 +30,7 @@ class Puzzle {
     this.login = null;
     this.start = null;
     this.game = null;
+    this.round = 0;
 
     this.init();
   }
@@ -62,9 +64,17 @@ class Puzzle {
     const parentElement: HTMLElement | null = this.parent;
     if (parentElement) {
       parentElement.innerHTML = "";
-      this.game = new Game(this.data.rounds[0]);
+      this.game = new Game(
+        this.data.rounds[this.round],
+        this.loadNextLvl.bind(this),
+      );
       this.parent?.append(this.game.getHtml());
     }
+  }
+
+  loadNextLvl() {
+    this.round++;
+    this.loadGame();
   }
 }
 
