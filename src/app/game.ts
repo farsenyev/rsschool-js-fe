@@ -107,6 +107,16 @@ class Game {
     } else {
       this.answer.push(target.innerHTML);
       this.answerCon?.append(target);
+      this.checkButtonImplement();
+    }
+  }
+
+  checkButtonImplement(): void {
+    const currentSentence = this.sentences[this.currentSentenceIndex]?.sentence;
+    if (currentSentence && this.answer.join(" ") === currentSentence) {
+      if (this.checkBtn) {
+        this.checkBtn.innerHTML = "Continue";
+      }
     }
   }
 
@@ -118,6 +128,14 @@ class Game {
         this.showNextSentence();
       } else {
         this.winLevel();
+      }
+    } else {
+      for (let i = 0; i < this.answer.length; i++) {
+        if (
+          this.answer[i] !== this.sentences[this.currentSentenceIndex].answer[i]
+        ) {
+          alert(`word on ${i + 1} position is incorrect`);
+        }
       }
     }
   }
