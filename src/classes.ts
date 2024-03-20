@@ -3,17 +3,17 @@ import Start from "./login/start";
 import Game from "./app/game";
 
 interface Data {
-    rounds: Array<{
-        words: Array<{
-            audioExample: string;
-            textExample: string;
-            textExampleTranslate: string;
-            id: number;
-            word: string;
-            wordTranslate: string;
-        }>;
-    }>,
-    roundsCount: number;
+  rounds: Array<{
+    words: Array<{
+      audioExample: string;
+      textExample: string;
+      textExampleTranslate: string;
+      id: number;
+      word: string;
+      wordTranslate: string;
+    }>;
+  }>;
+  roundsCount: number;
 }
 
 class Puzzle {

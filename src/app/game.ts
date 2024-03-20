@@ -50,7 +50,7 @@ class Game {
     this.level.words.forEach((sentence) => {
       this.sentences.push({
         sentence: sentence.textExample,
-        answer: sentence.textExample.split(" ")
+        answer: sentence.textExample.split(" "),
       });
     });
     console.log(this.sentences);
@@ -154,12 +154,18 @@ class Game {
   }
 
   skipHandler(): void {
-    const wordCon = document.getElementById(`word-con-${this.currentSentenceIndex}`);
+    const wordCon = document.getElementById(
+      `word-con-${this.currentSentenceIndex}`,
+    );
     if (wordCon) {
-      const words = Array.from(wordCon.getElementsByTagName('div')) as HTMLDivElement[];
+      const words = Array.from(
+        wordCon.getElementsByTagName("div"),
+      ) as HTMLDivElement[];
       words.forEach((e: HTMLDivElement) => e.click());
       const answers = this.sentences[this.currentSentenceIndex]?.answer || [];
-      let elems = Array.from(wordCon.getElementsByTagName('div')) as HTMLDivElement[];
+      let elems = Array.from(
+        wordCon.getElementsByTagName("div"),
+      ) as HTMLDivElement[];
       while (elems.length && answers.length) {
         let search = answers.shift();
         for (let i = 0; i < elems.length; i++) {
@@ -168,11 +174,12 @@ class Game {
             break;
           }
         }
-        elems = Array.from(wordCon.getElementsByTagName('div')) as HTMLDivElement[];
+        elems = Array.from(
+          wordCon.getElementsByTagName("div"),
+        ) as HTMLDivElement[];
       }
     }
   }
-
 
   showNextSentence(): void {
     this.currentSentenceIndex++;

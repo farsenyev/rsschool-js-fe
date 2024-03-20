@@ -5,9 +5,9 @@ class Start {
   name: string;
   surname: string;
   userData: Array<{
-    name: string,
-    surname: string
-  }>
+    name: string;
+    surname: string;
+  }>;
 
   constructor(toLoadPage: Function, toGamePage: Function) {
     this.container = null;
@@ -20,9 +20,7 @@ class Start {
   }
 
   init() {
-    this.userData = JSON.parse(
-      <string>localStorage.getItem("UserData"),
-    );
+    this.userData = JSON.parse(<string>localStorage.getItem("UserData"));
     this.name = this.userData[this.userData.length - 1].name;
     this.surname = this.userData[this.userData.length - 1].surname;
     this.createHtml();
