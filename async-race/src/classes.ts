@@ -20,20 +20,22 @@ class Race {
         this.init()
     }
 
-    init(){
+    init() {
         this.container = document.createElement('section');
         this.container.classList.add('main-container')
         this.parent.append(this.container)
+
         this.loadPage()
     }
 
     loadPage(){
         this.controls = new Controls(this.loadGarage.bind(this), this.loadWinners.bind(this))
         this.parent.prepend(this.controls.getControls());
+
         this.loadGarage();
     }
 
-    loadGarage(){
+    async loadGarage() {
         console.log('garage')
         this.clearContainer()
         this.garage = new Garage();
