@@ -406,7 +406,7 @@ class Garage{
             counter += velocity * 10;
             distance && (distance.style.width = counter + 'px');
         }, 10)
-        drive.then((data) => {
+        drive.then(() => {
             clearInterval(this.intervals[id])
         })
     }
