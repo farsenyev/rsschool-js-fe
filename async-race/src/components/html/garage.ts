@@ -14,6 +14,10 @@ class Garage{
     selected: Cars | null;
     page: number;
     garage: HTMLElement | null;
+    carNameValue: string;
+    carColorValue: string;
+    changedCarNameValue: string;
+    changedCarColorValue: string;
 
     constructor() {
         this.data = null;
@@ -21,6 +25,10 @@ class Garage{
         this.garage = null;
 
         this.page = 1;
+        this.carNameValue = '';
+        this.carColorValue = '';
+        this.changedCarNameValue = '';
+        this.changedCarColorValue = '';
         this.container = null;
         this.controlsCon = null;
         this.carContainer = null;
@@ -30,7 +38,38 @@ class Garage{
     }
 
     init(){
+        this.getLocalData()
         this.createHtml()
+    }
+
+    getLocalData(){
+        if (localStorage.getItem('page') !== null) {
+            this.page = Number(localStorage.getItem('page'));
+        }
+        if (localStorage.getItem('carNameValue') !== null) {
+            this.carNameValue = String(localStorage.getItem('carNameValue'));
+        }
+        if (localStorage.getItem('carColorValue') !== null) {
+            this.carColorValue = String(localStorage.getItem('carColorValue'));
+        }
+        if (localStorage.getItem('changedCarNameValue') !== null) {
+            this.changedCarNameValue = String(localStorage.getItem('changedCarNameValue'));
+        }
+        if (localStorage.getItem('changedCarColorValue') !== null) {
+            this.changedCarColorValue = String(localStorage.getItem('changedCarColorValue'));
+        }
+    }
+
+    setLocalData(){
+        localStorage.setItem('page', String(this.page));
+
+    }
+
+    setCarLocalData(){
+        localStorage.setItem('carNameValue', this.carNameValue);
+        localStorage.setItem('carColorValue', this.carColorValue);
+        localStorage.setItem('changedCarNameValue', this.changedCarNameValue);
+        localStorage.setItem('changedCarColorValue', this.changedCarColorValue);
     }
 
     createHtml(){
@@ -56,18 +95,39 @@ class Garage{
 
     createBtns(){
         const carName: HTMLElement = document.createElement('input');
+        ;(carName as HTMLInputElement).value = this.carNameValue;
+        carName.addEventListener('blur', () => {
+            this.carNameValue = (event.target as HTMLInputElement).value;
+            this.setCarLocalData()
+        });
         carName.setAttribute('type', 'text');
         carName.id = 'createdCarName'
 
         const carColor: HTMLElement = document.createElement('input');
+        ;(carColor as HTMLInputElement).value = this.carColorValue
+        carColor.addEventListener('blur', () => {
+            this.carColorValue = (event.target as HTMLInputElement).value;
+            this.setCarLocalData()
+        })
         carColor.setAttribute('type', 'color');
         carColor.id = 'createdCarColor';
 
-        const changeName: HTMLElement = document.createElement('input');
+        const changeName: HTMLInputElement = document.createElement('input');
+        changeName.value = this.changedCarNameValue;
+        ;(changeName as HTMLInputElement).value = this.changedCarNameValue
+        changeName.addEventListener('blur', () => {
+            this.changedCarNameValue = (event.target as HTMLInputElement).value;
+            this.setCarLocalData()
+        })
         changeName.setAttribute('type', 'text');
         changeName.id = 'changeCarName'
 
         const changeColor: HTMLElement = document.createElement('input');
+        ;(changeColor as HTMLInputElement).value = this.changedCarColorValue;
+        changeColor.addEventListener('blur', () => {
+            this.changedCarColorValue = (event.target as HTMLInputElement).value;
+            this.setCarLocalData()
+        })
         changeColor.setAttribute('type', 'color');
         changeColor.id = 'changeCarColor'
 
@@ -122,6 +182,7 @@ class Garage{
         this.createCars()
         const updatePage = document.querySelector('.page-number');
         updatePage.innerHTML = String(this.page)
+        this.setLocalData()
     }
 
     prevPage(){
@@ -129,6 +190,7 @@ class Garage{
         this.createCars()
         const updatePage = document.querySelector('.page-number');
         updatePage.innerHTML = String(this.page)
+        this.setLocalData()
     }
 
     async createCars() {
@@ -143,9 +205,16 @@ class Garage{
                 name.innerHTML = car.name;
                 name.classList.add('car-name');
 
+                    //TODO: switch to car logo
                 const color: string = car.color;
-
                 carCon.style.background = color;
+
+                const startBtn = document.createElement('button');
+                startBtn.innerHTML = 'S';
+                startBtn.addEventListener('click', () => {
+                    this.selected = car;
+                    this.startHandler()
+                })
 
                 const selectBtn = document.createElement('button');
                 selectBtn.addEventListener('click', () => {
@@ -161,7 +230,7 @@ class Garage{
                 })
                 deleteBtn.innerHTML = 'Delete';
 
-                carCon.append(name, selectBtn, deleteBtn)
+                carCon.append(name, startBtn, selectBtn, deleteBtn)
                 this.updatePage()
                 this.carContainer?.append(carCon)
             }) : false;
@@ -222,6 +291,18 @@ class Garage{
 
     resetHandler(){
         console.log('rest')
+    }
+
+    async startHandler(){
+        if ("id" in this.selected) {
+            const start = await Requests.startStopEngine(this.selected.id, 'started');
+            const drive = await Requests.switchToDrive(this.selected.id, 'drive', this.stopDrive.bind(this));
+        }
+    }
+
+    stopDrive(){
+        //TODO: stop animation if car
+        console.log('work')
     }
 
     async generateHandler() {

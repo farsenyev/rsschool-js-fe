@@ -66,6 +66,30 @@ class Requests{
         }
     }
 
+    static async startStopEngine(id: number, status: string): Promise<{} | string>{
+        try{
+            const resp = await fetch(`${this._url}/engine/?id=${id}&status=${status}`, {method: 'PATCH'});
+            return await resp.json();
+        }catch (e) {
+         console.log(e)
+        }
+    }
+
+    static async switchToDrive(id: number, status: string, callback: Function): Promise<{} | Function>{
+        const resp = await fetch(`${this._url}/engine/?id=${id}&status=${status}`, {method: 'PATCH'});
+        if (resp.ok) return await resp.json();
+        if (resp.status === 500) return callback();
+        // throw new Error('something gone wrong')
+
+
+
+        // if (resp.ok) return await resp.json();
+        // if (resp.status === 400) return '400'
+        // if (resp.status === 404) return '404'
+        // if (resp.status === 429) return '429'
+        // if (resp.status === 500) return '500'
+    }
+
     static getRandomCar(){
         const marks: string[] = ['BMW', 'Lotus', 'Pininfarina', 'McLaren', 'Koenigsegg', 'Chevrolet', 'McLaren', 'Aston Martin', 'Porsche', 'Rimac']
         const model: string[] = ['M Hybrid V8', 'Evija', 'Battista', 'Speedtail', 'Regera', 'Corvette C8', 'Artura', 'Valkyrie', '918 Spyder', 'Nevera']
