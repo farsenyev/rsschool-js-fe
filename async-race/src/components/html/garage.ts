@@ -107,8 +107,8 @@ class Garage{
         const carName: HTMLElement = document.createElement('input');
         ;(carName as HTMLInputElement).value = this.carNameValue;
         carName.addEventListener('blur', () => {
-            this.carNameValue = (event.target as HTMLInputElement).value;
-            this.setCarNameLocalData()
+            this.carNameValue = (event!.target as HTMLInputElement).value;
+            this.setCarNameLocalData();
         });
         carName.setAttribute('type', 'text');
         carName.id = 'createdCarName'
@@ -116,9 +116,10 @@ class Garage{
         const carColor: HTMLElement = document.createElement('input');
         ;(carColor as HTMLInputElement).value = this.carColorValue
         carColor.addEventListener('blur', () => {
-            this.carColorValue = (event.target as HTMLInputElement).value;
-            this.setCarColorLocalData()
-        })
+            this.carColorValue = (event!.target as HTMLInputElement).value;
+            this.setCarColorLocalData();
+        });
+
         carColor.setAttribute('type', 'color');
         carColor.id = 'createdCarColor';
 
@@ -126,7 +127,7 @@ class Garage{
         changeName.value = this.changedCarNameValue;
         ;(changeName as HTMLInputElement).value = this.changedCarNameValue
         changeName.addEventListener('blur', () => {
-            this.changedCarNameValue = (event.target as HTMLInputElement).value;
+            this.changedCarNameValue = (event!.target as HTMLInputElement).value;
             this.setCarNameChangedLocalData()
         })
         changeName.setAttribute('type', 'text');
@@ -135,7 +136,7 @@ class Garage{
         const changeColor: HTMLElement = document.createElement('input');
         ;(changeColor as HTMLInputElement).value = this.changedCarColorValue;
         changeColor.addEventListener('blur', () => {
-            this.changedCarColorValue = (event.target as HTMLInputElement).value;
+            this.changedCarColorValue = (event!.target as HTMLInputElement).value;
             this.setCarColorChangedLocalData()
         })
         changeColor.setAttribute('type', 'color');
@@ -193,7 +194,7 @@ class Garage{
         this.page++
         this.createCars()
         const updatePage = document.querySelector('.page-number');
-        updatePage.innerHTML = String(this.page)
+        if (updatePage) updatePage.innerHTML = String(this.page)
         this.setLocalData()
     }
 
@@ -202,7 +203,9 @@ class Garage{
         this.page--
         this.createCars()
         const updatePage = document.querySelector('.page-number');
-        updatePage.innerHTML = String(this.page)
+        if (updatePage !== null) {
+            updatePage.innerHTML = String(this.page);
+        }
         this.setLocalData()
     }
 
@@ -243,31 +246,38 @@ class Garage{
                 startBtn.id = `start-btn-${car.id}`;
                 startBtn.innerHTML = 'S';
                 startBtn.addEventListener('click', (event) => {
-                    const target:EventTarget | null | undefined = event?.target
-                    target.disabled = true;
+                    const target: EventTarget | null | undefined = event?.target;
+                    if (target) {
+                        (target as HTMLButtonElement).disabled = true;
 
-                    const stopBtn = document.getElementById(`stop-btn-${car.id}`);
-                    stopBtn.disabled = false;
+                        const stopBtn = document.getElementById(`stop-btn-${car.id}`) as HTMLButtonElement | null;
+                        if (stopBtn) {
+                            stopBtn.disabled = false;
+                        }
 
-                    this.selected = car;
-                    const id = car.id
-                    this.startHandler(id)
+                        this.selected = car;
+                        const id = car.id;
+                        this.startHandler(id);
+                    }
                 });
-
                 const stopBtn = document.createElement('button');
                 stopBtn.id = `stop-btn-${car.id}`;
                 stopBtn.innerHTML = 'D';
                 stopBtn.disabled = true;
                 stopBtn.addEventListener('click', (event) => {
                     const target:EventTarget | null | undefined = event?.target
-                    target.disabled = true;
+                    if (target) {
+                        (target as HTMLButtonElement).disabled = true;
 
-                    const startBtn = document.getElementById(`start-btn-${car.id}`);
-                    startBtn.disabled = false;
+                        const startBtn = document.getElementById(`start-btn-${car.id}`) as HTMLButtonElement | null;
+                        if (startBtn) {
+                            startBtn.disabled = false;
+                        }
 
-                    this.selected = car;
-                    const id = car.id
-                    this.stopHandler(id)
+                        this.selected = car;
+                        const id = car.id
+                        this.stopHandler(id)
+                    }
                 });
 
                 const selectBtn = document.createElement('button');
@@ -319,6 +329,7 @@ class Garage{
                     this.selected.name,
                     this.selected.color
                 );
+                console.log(resp)
                 if (changedName !== '') this.selected.name = changedName;
                 changedColor !== '' ? this.selected.color = changedColor : this.selected.color;
                 await this.createCars()
@@ -331,7 +342,7 @@ class Garage{
             const createdName = (document.getElementById('createdCarName') as HTMLInputElement).value;
             const createdColor = (document.getElementById('createdCarColor') as HTMLInputElement).value;
             const resp = await Requests.createCar(createdName, createdColor);
-
+            console.log(resp)
             await this.createCars()
             console.log('succeed')
         }catch (error){
@@ -340,27 +351,27 @@ class Garage{
     }
 
     async raceHandler() {
-        if (Array.isArray(this.data)) {
-            const ids = this.data.map(car => car.id);
-            const cars: Promise<void>[] = ids.map(car => this.startHandler(car));
-            const data = Promise.all(cars.map(prom => {
-                console.log(prom)
-                return prom.then(data => console.log(data))
-            }))
-            console.log(data, 'data')
-            data.then((data) => {
-                console.log(data);
-                const finishedCars = data.filter(car => car.state === 'finished');
-                if (finishedCars.length > 0) {
-                    const winner = finishedCars.sort((a, b) => a.time - b.time)[0];
-                    console.log('Победитель:', winner.id);
-                } else {
-                    console.log('Гонка завершена без победителя');
-                }
-            }).catch(error => {
-                console.error('Ошибка:', error);
-            });
-        }
+        // if (Array.isArray(this.data)) {
+        //     const ids = this.data.map(car => car.id);
+        //     const cars: Promise<void>[] = ids.map(car => this.startHandler(car));
+        //     const data = Promise.all(cars.map(prom => {
+        //         console.log(prom)
+        //         return prom.then(data => console.log(data))
+        //     }))
+        //     console.log(data, 'data')
+        //     data.then((data) => {
+        //         console.log(data);
+        //         const finishedCars = data.filter(car => car.state === 'finished');
+        //         if (finishedCars.length > 0) {
+        //             const winner = finishedCars.sort((a, b) => a.time - b.time)[0];
+        //             console.log('Победитель:', winner.id);
+        //         } else {
+        //             console.log('Гонка завершена без победителя');
+        //         }
+        //     }).catch(error => {
+        //         console.error('Ошибка:', error);
+        //     });
+        // }
         console.log('race');
     }
 
@@ -405,16 +416,18 @@ class Garage{
         console.log('work')
     }
 
-    async stopHandler(id){
+    async stopHandler(id: number){
         const stop = await Requests.startStopEngine(id, 'stopped');
+        console.log(stop)
         clearInterval(this.intervals[id])
         const distance = document.getElementById(`move-car-${id}`)//race
-        distance.style.width = 0 + 'px'
+        if (distance) distance.style.width = 0 + 'px'
     }
 
     async generateHandler() {
         console.log('generate')
         const data = await Requests.randomCars()
+        console.log(data)
         await this.createCars()
     }
 
@@ -426,7 +439,7 @@ class Garage{
         if (this.selected) {
             try {
                 const data = await Requests.deleteCar(this.selected.id);
-                console.log('deleted');
+                console.log('deleted', data);
                 await this.createCars()
             } catch (error){
                 console.log(`${error} do not deleted`)

@@ -16,13 +16,13 @@ class Requests{
         return await resp.json()
     }
 
-    static async getCar(name: string, color: string, id: number): Promise<[]>{
-        const resp = await fetch(`${this._url}/garage/${id}`, {method: 'GET'})
+    // static async getCar(name: string, color: string, id: number): Promise<[]>{
+    //     const resp = await fetch(`${this._url}/garage/${id}`, {method: 'GET'})
+    //
+    //     return await resp.json()
+    // }
 
-        return await resp.json()
-    }
-
-    static async updateCar(newName: string | null, newColor: string | null, id, prevName: string, prevColor: string ): Promise<[]>{
+    static async updateCar(newName: string | null, newColor: string | null, id: number, prevName: string, prevColor: string ): Promise<[]>{
         const resp = await fetch(`${this._url}/garage/${id}`, {
             method: 'PUT',
             headers:{
@@ -66,7 +66,7 @@ class Requests{
         }
     }
 
-    static async startStopEngine(id: number, status: string): Promise<{} | string>{
+    static async startStopEngine(id: number, status: string): Promise<{} | string | undefined>{
         try{
             const resp = await fetch(`${this._url}/engine/?id=${id}&status=${status}`, {method: 'PATCH'});
             return await resp.json();
@@ -75,7 +75,7 @@ class Requests{
         }
     }
 
-    static async switchToDrive(id: number, status: string, callback: Function): Promise<{} | Function>{
+    static async switchToDrive(id: number, status: string, callback: Function): Promise<{} | Function | undefined>{
         const resp = await fetch(`${this._url}/engine/?id=${id}&status=${status}`, {method: 'PATCH'});
         if (resp.ok) return await resp.json();
         if (resp.status === 500) return callback();
