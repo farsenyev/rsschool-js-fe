@@ -351,27 +351,23 @@ class Garage{
     }
 
     async raceHandler() {
-        // if (Array.isArray(this.data)) {
-        //     const ids = this.data.map(car => car.id);
-        //     const cars: Promise<void>[] = ids.map(car => this.startHandler(car));
-        //     const data = Promise.all(cars.map(prom => {
-        //         console.log(prom)
-        //         return prom.then(data => console.log(data))
-        //     }))
-        //     console.log(data, 'data')
-        //     data.then((data) => {
-        //         console.log(data);
-        //         const finishedCars = data.filter(car => car.state === 'finished');
-        //         if (finishedCars.length > 0) {
-        //             const winner = finishedCars.sort((a, b) => a.time - b.time)[0];
-        //             console.log('Победитель:', winner.id);
-        //         } else {
-        //             console.log('Гонка завершена без победителя');
-        //         }
-        //     }).catch(error => {
-        //         console.error('Ошибка:', error);
-        //     });
-        // }
+        if (Array.isArray(this.data)) {
+            const ids = this.data.map(car => car.id);
+            console.log(ids)
+            const cars: Promise<{ state: string; time: number; id: number } | { state: string; id: number }>[] = ids.map(car => this.startHandler(car));
+            console.log(cars, 'cars array');
+            (Promise.all(cars)).then((data) => {
+                console.log(data);
+                const finishedCars = data.filter(car => car.state === 'finished');
+                if (finishedCars.length > 0) {
+                    const winner = finishedCars.sort((a, b) => a.time - b.time)[0];
+                    console.log(winner.id)
+                    this.winHandler(winner.id, winner.time)
+                }
+            }).catch(error => {
+                console.error('Ошибка:', error);
+            });
+        }
         console.log('race');
     }
 
@@ -382,6 +378,9 @@ class Garage{
             const reset = ids.map(id => this.stopHandler(id))
             await Promise.race(reset)
         }
+
+        const modal = document.getElementById('modal-con')
+        if (modal) modal.remove()
     }
 
     async startHandler(id: number){
@@ -406,9 +405,16 @@ class Garage{
             counter += velocity * 10;
             distance && (distance.style.width = counter + 'px');
         }, 10)
-        drive.then(() => {
-            clearInterval(this.intervals[id])
-        })
+        const startTime = Date.now()
+        return drive.then((data) => {
+            clearInterval(this.intervals[id]);
+            const endTime = Date.now();
+            if (data.success) return { state: 'finished', id: id, time: endTime - startTime };
+            throw new Error('test');
+        }).catch((e) => {
+            clearInterval(this.intervals[id]);
+            return { state: 'broken', id: id };
+        });
     }
 
     stopDrive(){
@@ -435,16 +441,55 @@ class Garage{
         //point car
     }
 
-    async deleteCarHandler(){
+    async deleteCarHandler() {
         if (this.selected) {
             try {
                 const data = await Requests.deleteCar(this.selected.id);
                 console.log('deleted', data);
                 await this.createCars()
-            } catch (error){
+            } catch (error) {
                 console.log(`${error} do not deleted`)
             }
         }
+        if ("id" in this.selected) {
+            const winnerExist = await Requests.getWinner(this.selected.id);
+            // console.log(this.selected.id)
+            const deleteWinner = await Requests.deleteWinner(this.selected.id);
+        }
+    }
+
+    async winHandler(id: number, time: number) {
+        const modal = document.createElement('div');
+        modal.classList.add('modal-con');
+        modal.id = 'modal-con'
+
+        const text = document.createElement('h1');
+        text.classList.add('modal-text');
+
+        if (this.data != null) {
+            text.innerHTML = `${this.data[id-1].name} wins the race in ${time / 1000}s`
+        }
+
+        modal.append(text);
+
+        this.container?.append(modal)
+
+        //TODO: add to winners OR update existing
+
+        if (this.data != null) {
+            var name = this.data[id-1].name
+        }
+
+        const winnerExist = await Requests.getWinner(id);
+        if (winnerExist.length === 0) {
+            const create = await Requests.createWinner(id, name, time, 1);
+        }else{
+            const winner = winnerExist.find(winner => winner.id === id)
+            let wins = Number(winner.wins)
+            wins++
+            const update = await Requests.updateWinner(id, wins, time, winner.name);
+        }
+
     }
 
     getHtml(): Node{

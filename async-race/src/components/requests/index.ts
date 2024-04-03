@@ -81,6 +81,51 @@ class Requests{
         if (resp.status === 500) return callback();
     }
 
+    static async getWinner(id?: number){
+        let resp = await fetch(`${this._url}/winners/?id=${id}`, {method: 'GET'})
+        if (!id) resp = await fetch(`${this._url}/winners/`, {method: 'GET'})
+        return await resp.json();
+    }
+
+    static async createWinner(id: number, name: string, time: number, wins: number){
+        const resp = await fetch(`${this._url}/winners/`, {
+            method: 'POST',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                id: id,
+                name: name,
+                time: time,
+                wins: wins
+            })
+        });
+
+        return await resp.json();
+    }
+
+    static async deleteWinner(id: number){
+        const resp = await fetch(`${this._url}/winners/${id}`, {method: 'DELETE'})
+
+        return await resp.json();
+    }
+
+    static async updateWinner(id: number, wins: number, time: number, name: string){
+        const resp = await fetch(`${this._url}/winners/${id}`, {
+            method: 'PUT',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                wins: wins,
+                time: time
+            })
+        })
+
+        return await resp.json()
+    }
+
     static getRandomCar(){
         const marks: string[] = ['BMW', 'Lotus', 'Pininfarina', 'McLaren', 'Koenigsegg', 'Chevrolet', 'McLaren', 'Aston Martin', 'Porsche', 'Rimac']
         const model: string[] = ['M Hybrid V8', 'Evija', 'Battista', 'Speedtail', 'Regera', 'Corvette C8', 'Artura', 'Valkyrie', '918 Spyder', 'Nevera']

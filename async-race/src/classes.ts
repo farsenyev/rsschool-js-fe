@@ -45,6 +45,8 @@ class Race {
     loadWinners(){
         console.log('winners')
         this.clearContainer()
+        this.winners = new Winners()
+        this.container?.append(this.winners.getHtml())
     }
 
     clearContainer(){

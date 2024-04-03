@@ -108,3 +108,10 @@ button:focus-visible {
   width: 120px;
   height: 120px;
 }
+
+.modal-con{
+  position: absolute;
+  left: 35%;
+  top: 50%;
+  z-index: 5;
+}
