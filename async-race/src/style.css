@@ -136,7 +136,7 @@ table {
   /*border: 1px solid #364043;*/
 }
 
-tr {
+tr, th {
   border-bottom: 1px solid #73858c;
   color: #E2B842;
   font-size: 1.2em;
