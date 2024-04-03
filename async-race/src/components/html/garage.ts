@@ -423,7 +423,7 @@ class Garage{
         return drive.then((data) => {
             clearInterval(this.intervals[id]);
             const endTime = Date.now();
-            if (data && data.success) return { state: 'finished', id: id, time: endTime - startTime };
+            if (data instanceof Object && 'success' in data && data.success) return { state: 'finished', id: id, time: endTime - startTime };
             throw new Error('test');
         }).catch((_) => {
             clearInterval(this.intervals[id]);
@@ -486,13 +486,14 @@ class Garage{
             var winnerData = this.data?.find((car: Cars) => car.id === id)
         }
 
-        text.innerHTML = `${winnerData.name} wins the race in ${time / 1000}s`
+        if (winnerData) text.innerHTML = `${winnerData.name} wins the race in ${time / 1000}s`
 
         modal.append(text);
 
         this.container?.append(modal)
 
-         var name = winnerData.name
+        let name: string = ''
+        if (winnerData)  name = winnerData.name
 
         const winnerExist = await Requests.getWinner(id);
         if (winnerExist.length === 0) {

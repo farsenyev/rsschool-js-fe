@@ -1,5 +1,11 @@
 import Requests from "../requests/index";
 
+interface Cars{
+    name: string,
+    color: string,
+    id: number
+}
+
 class Winners {
     container: HTMLElement | null;
     page: number;
@@ -49,7 +55,7 @@ class Winners {
             const name = document.createElement('td');
             name.innerHTML = winner.name;
             if (cars != null) {
-                name.style.color = cars[i]?.color
+                name.style.color = (cars[i] as Cars).color
             }
 
             const time = document.createElement('td');
