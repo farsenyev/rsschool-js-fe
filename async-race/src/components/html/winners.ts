@@ -1,5 +1,4 @@
 import Requests from "../requests/index";
-import {f} from "vite/dist/node/types.d-aGj9QkWt";
 
 interface Cars{
     name: string,
