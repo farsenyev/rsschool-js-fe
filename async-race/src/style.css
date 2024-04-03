@@ -96,8 +96,14 @@ button:focus-visible {
 .pagination-container {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.selected{
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 5px, rgba(240, 46, 170, 0.3) 10px 10px, rgba(240, 46, 170, 0.2) 15px 15px, rgba(240, 46, 170, 0.1) 20px 20px, rgba(240, 46, 170, 0.05) 25px 25px;
 }
 
 .race{
@@ -114,4 +120,32 @@ button:focus-visible {
   left: 35%;
   top: 50%;
   z-index: 5;
+}
+
+.winner-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+table {
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+  /*border: 1px solid #364043;*/
+}
+
+tr {
+  border-bottom: 1px solid #73858c;
+  color: #E2B842;
+  font-size: 1.2em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+td {
+  font-weight: 400;
+  padding: 0.65em 1em;
 }

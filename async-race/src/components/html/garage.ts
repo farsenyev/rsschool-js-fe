@@ -42,6 +42,18 @@ class Garage{
     init(){
         this.getLocalData()
         this.createHtml()
+        this.removeSelected()
+    }
+
+    removeSelected(){
+        document.addEventListener('click', ()=>{
+            const selected = document.getElementsByClassName('selected');
+            if (selected){
+                if (event.target !== document.getElementById('btn-select')) {
+                    [...selected].forEach(item => item.classList.remove('selected'))
+                }
+            }
+        })
     }
 
     getLocalData(){
@@ -281,7 +293,10 @@ class Garage{
                 });
 
                 const selectBtn = document.createElement('button');
+                selectBtn.id = 'btn-select';
                 selectBtn.addEventListener('click', () => {
+                    const target = event.target;
+                    (target as HTMLElement).parentNode.classList.add('selected')
                     this.selected = car;
                     this.selectCarHandler()
                 });
@@ -371,7 +386,6 @@ class Garage{
         console.log('race');
     }
 
-
     async resetHandler(){
         if(Array.isArray(this.data)) {
             const ids = this.data.map(car => car.id);
@@ -438,6 +452,7 @@ class Garage{
     }
 
     async selectCarHandler(){
+
         //point car
     }
 
@@ -466,19 +481,15 @@ class Garage{
         const text = document.createElement('h1');
         text.classList.add('modal-text');
 
-        if (this.data != null) {
-            text.innerHTML = `${this.data[id-1].name} wins the race in ${time / 1000}s`
-        }
+        const winnerData = this.data?.find(car => car.id === id)
+
+        text.innerHTML = `${winnerData.name} wins the race in ${time / 1000}s`
 
         modal.append(text);
 
         this.container?.append(modal)
 
-        //TODO: add to winners OR update existing
-
-        if (this.data != null) {
-            var name = this.data[id-1].name
-        }
+         var name = winnerData.name
 
         const winnerExist = await Requests.getWinner(id);
         if (winnerExist.length === 0) {
