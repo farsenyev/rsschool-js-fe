@@ -44,19 +44,19 @@ class Winners {
         const endIndex = startIndex + 10;
         const currentData = data.slice(startIndex, endIndex);
 
-        currentData.forEach((winner, i = 0) => {
+        currentData.forEach((winner: {name: string, time: number, wins: number}, i = 0) => {
             const row = document.createElement('tr');
             const name = document.createElement('td');
             name.innerHTML = winner.name;
             if (cars != null) {
-                name.style.color = cars[i].color
+                name.style.color = cars[i]?.color
             }
 
             const time = document.createElement('td');
             time.innerHTML = `${winner.time / 1000}s`;
 
             const wins = document.createElement('td');
-            wins.innerHTML = winner.wins;
+            wins.innerHTML = String(winner.wins);
 
             row.append(name, time, wins)
 

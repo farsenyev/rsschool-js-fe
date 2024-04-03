@@ -75,7 +75,7 @@ class Requests{
         }
     }
 
-    static async switchToDrive(id: number, status: string, callback: Function): Promise<{} | Function | undefined>{
+    static async switchToDrive(id: number, status: string, callback: Function): Promise<{success: boolean} | Function | undefined>{
         const resp = await fetch(`${this._url}/engine/?id=${id}&status=${status}`, {method: 'PATCH'});
         if (resp.ok) return await resp.json();
         if (resp.status === 500) return callback();

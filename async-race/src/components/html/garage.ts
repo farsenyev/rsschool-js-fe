@@ -46,7 +46,7 @@ class Garage{
     }
 
     removeSelected(){
-        document.addEventListener('click', ()=>{
+        document.addEventListener('click', (event: Event)=>{
             const selected = document.getElementsByClassName('selected');
             if (selected){
                 if (event.target !== document.getElementById('btn-select')) {
@@ -294,9 +294,9 @@ class Garage{
 
                 const selectBtn = document.createElement('button');
                 selectBtn.id = 'btn-select';
-                selectBtn.addEventListener('click', () => {
+                selectBtn.addEventListener('click', (event: Event) => {
                     const target = event.target;
-                    (target as HTMLElement).parentNode.classList.add('selected')
+                    ((target as HTMLElement)?.parentNode as HTMLElement).classList.add('selected')
                     this.selected = car;
                     this.selectCarHandler()
                 });
@@ -369,15 +369,15 @@ class Garage{
         if (Array.isArray(this.data)) {
             const ids = this.data.map(car => car.id);
             console.log(ids)
-            const cars: Promise<{ state: string; time: number; id: number } | { state: string; id: number }>[] = ids.map(car => this.startHandler(car));
+            const cars: Promise<{ state: string; time?: number; id: number }>[] = ids.map(car => this.startHandler(car));
             console.log(cars, 'cars array');
             (Promise.all(cars)).then((data) => {
                 console.log(data);
                 const finishedCars = data.filter(car => car.state === 'finished');
                 if (finishedCars.length > 0) {
-                    const winner = finishedCars.sort((a, b) => a.time - b.time)[0];
+                    const winner = finishedCars.sort((a, b) => a.time! - b.time!)[0];
                     console.log(winner.id)
-                    this.winHandler(winner.id, winner.time)
+                    this.winHandler(winner.id, winner.time!)
                 }
             }).catch(error => {
                 console.error('Ошибка:', error);
@@ -423,9 +423,9 @@ class Garage{
         return drive.then((data) => {
             clearInterval(this.intervals[id]);
             const endTime = Date.now();
-            if (data.success) return { state: 'finished', id: id, time: endTime - startTime };
+            if (data && data.success) return { state: 'finished', id: id, time: endTime - startTime };
             throw new Error('test');
-        }).catch((e) => {
+        }).catch((_) => {
             clearInterval(this.intervals[id]);
             return { state: 'broken', id: id };
         });
@@ -461,16 +461,17 @@ class Garage{
             try {
                 const data = await Requests.deleteCar(this.selected.id);
                 console.log('deleted', data);
-                await this.createCars()
+                await this.createCars();
+                if ("id" in this.selected) {
+                    const winnerExist = await Requests.getWinner(this.selected.id);
+                    const deleteWinner = await Requests.deleteWinner(this.selected.id);
+                    console.log(winnerExist, deleteWinner)
+                }
             } catch (error) {
                 console.log(`${error} do not deleted`)
             }
         }
-        if ("id" in this.selected) {
-            const winnerExist = await Requests.getWinner(this.selected.id);
-            // console.log(this.selected.id)
-            const deleteWinner = await Requests.deleteWinner(this.selected.id);
-        }
+
     }
 
     async winHandler(id: number, time: number) {
@@ -481,7 +482,9 @@ class Garage{
         const text = document.createElement('h1');
         text.classList.add('modal-text');
 
-        const winnerData = this.data?.find(car => car.id === id)
+        if (Array.isArray(this.data)){
+            var winnerData = this.data?.find((car: Cars) => car.id === id)
+        }
 
         text.innerHTML = `${winnerData.name} wins the race in ${time / 1000}s`
 
@@ -494,11 +497,13 @@ class Garage{
         const winnerExist = await Requests.getWinner(id);
         if (winnerExist.length === 0) {
             const create = await Requests.createWinner(id, name, time, 1);
+            console.log(create)
         }else{
-            const winner = winnerExist.find(winner => winner.id === id)
+            const winner = winnerExist.find((winner: {id: number, wins: number}) => winner.id === id)
             let wins = Number(winner.wins)
             wins++
             const update = await Requests.updateWinner(id, wins, time, winner.name);
+            console.log(update)
         }
 
     }
