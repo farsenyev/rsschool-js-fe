@@ -1,0 +1,25 @@
+.chat-container{
+    background: #d7012a;
+            /*#101096;*/
+    /*#d7012a*/
+    border-radius: 15px;
+    padding: 17px;
+    gap: 17px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.chat-info-container{
+    border: #242424 1px solid;
+    /*#d7012a*/
+    /*#242424*/
+    border-radius: 15px;
+    gap: 5px;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}

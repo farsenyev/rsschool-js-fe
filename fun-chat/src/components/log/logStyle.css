@@ -1,0 +1,32 @@
+.log-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+
+    margin: 0 auto;
+    width: 350px;
+    height: 300px;
+    border: aliceblue 1px solid;
+    padding: 5px;
+}
+
+.wrong-input{
+    border: #ff1029 2px solid;
+}
+
+input{
+    outline: none;
+    border: none;
+    border-bottom: 2px aliceblue solid;
+}
+
+input:focus {
+    border: none;
+    border-bottom: rgba(136, 215, 32, 0.27) 2px solid;
+}
+
+h6{
+    margin: 0;
+    padding: 0;
+}

@@ -20,5 +20,8 @@
     "prettier": "^3.2.5",
     "typescript": "^5.2.2",
     "vite": "^5.2.0"
+  },
+  "dependencies": {
+    "websocket": "^1.0.34"
   }
 }

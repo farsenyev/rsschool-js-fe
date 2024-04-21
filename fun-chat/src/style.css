@@ -94,3 +94,35 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.main-container{
+  margin: 0 auto;
+}
+
+.info-container{
+  position: absolute;
+  left: 30%;
+  top: 20%;
+  z-index: 3;
+  width: 600px;
+  height: 250px;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  border: azure 1px solid;
+  border-radius: 15px;
+
+  background: #1a1a1a;
+}
+
+.hide-info{
+  display: none;
+}
+
+.about-btn{
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
