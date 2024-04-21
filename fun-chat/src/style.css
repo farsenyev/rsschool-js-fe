@@ -95,11 +95,11 @@ button:focus-visible {
   }
 }
 
-.main-container{
+.main-container {
   margin: 0 auto;
 }
 
-.info-container{
+.info-container {
   position: absolute;
   left: 30%;
   top: 20%;
@@ -117,11 +117,11 @@ button:focus-visible {
   background: #1a1a1a;
 }
 
-.hide-info{
+.hide-info {
   display: none;
 }
 
-.about-btn{
+.about-btn {
   position: absolute;
   left: 10px;
   top: 10px;
