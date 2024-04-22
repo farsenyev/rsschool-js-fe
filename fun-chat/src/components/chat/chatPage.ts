@@ -3,16 +3,23 @@ import './chatStyle.css';
 class ChatPage {
   onLogout: Function;
   container: HTMLElement | null;
+  name: string | null;
 
   constructor(callback: Function) {
     this.container = null;
     this.onLogout = callback;
+    this.name = '';
 
     this.init();
   }
 
   init() {
+    this.getName()
     this.createHtml();
+  }
+
+  getName(){
+    this.name = localStorage.getItem('username');
   }
 
   createHtml() {
@@ -20,6 +27,7 @@ class ChatPage {
     this.container.classList.add('chat-container');
 
     this.createHeader();
+    this.createMainContainer()
     this.createFooter();
   }
 
@@ -28,7 +36,7 @@ class ChatPage {
     con.classList.add('chat-info-container');
 
     const user = document.createElement('h4');
-    user.innerHTML = `User: (username)`;
+    user.innerHTML = `User: ${this.name}`;
 
     const project = document.createElement('h4');
     project.innerHTML = 'Fun Chat';
@@ -42,6 +50,65 @@ class ChatPage {
 
     con.append(user, project, logOut);
     this.container?.append(con);
+  }
+
+  createMainContainer(){
+    const con = document.createElement('div');
+    con.classList.add('main-chat-container');
+
+    const users = document.createElement('div');
+    users.classList.add('users-container');
+
+    const search = document.createElement('input');
+    search.classList.add('search-user');
+    //TODO: make search by name
+    // search.addEventListener()
+
+    const usrCon = document.createElement('div');
+    usrCon.classList.add('users');
+
+    this.createUser(usrCon)
+
+    const msgs = document.createElement('div');
+    msgs.classList.add('messages');
+
+    const messageCon = document.createElement('div');
+    messageCon.classList.add('message-container');
+
+    const textCon = document.createElement('div');
+    textCon.classList.add('text-con');
+
+    const msgText = document.createElement('input');
+    msgText.classList.add('msg-text');
+    msgText.placeholder = 'Write text...';
+
+    const sendBtn = document.createElement('button');
+    sendBtn.classList.add('send-btn');
+    sendBtn.innerHTML = '>';
+    sendBtn.addEventListener('click', ()=>{})
+
+    users.append(search, usrCon);
+    textCon.append(msgText, sendBtn)
+    msgs.append(messageCon, textCon)
+    con.append(users, msgs);
+
+    this.container?.append(con)
+  }
+
+  createUser(parent){
+    const userCon = document.createElement('div');
+    userCon.classList.add('user');
+
+    const userStatus = document.createElement('div');
+    userStatus.classList.add('user-status');
+    //TODO: 'offline-user' css class for offline user
+
+    const userName = document.createElement('h5');
+    userName.classList.add('username');
+    userName.innerHTML = `${this.name}`
+
+    userCon.append(userStatus, userName)
+    parent.append(userCon)
   }
 
   createFooter() {

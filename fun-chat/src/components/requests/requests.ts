@@ -1,12 +1,13 @@
-import { WebSocket } from 'websocket';
-
 class Requests {
   url: string;
   server: WebSocket;
 
+  activeUsers = [];
+
   constructor() {
-    this.url = 'ws://192.168.1.100:4000';
-    this.server = new WebSocket(this.url, { noServer: true });
+    this.url = 'ws://localhost:4000';
+    this.server = new WebSocket(this.url);
+    this.server.onmessage = this.msgHandler;
     this.initServer();
   }
 
@@ -14,6 +15,26 @@ class Requests {
     this.server.onopen = function (event: Event) {
       console.log('connection established');
     };
+  }
+
+  msgHandler(msg: MessageEvent){
+    const data = JSON.parse(msg.data)
+    switch (data.type){
+      case 'USER_ACTIVE':
+        this.activeUsers = data.payload.users;
+        break;
+      case 'USER_INACTIVE':
+        this.activeUsers = data.payload.users;
+        break;
+      case 'USER_LOGIN':
+        this.activeUsers = data.payload.users;
+        break;
+      case 'USER_LOGOUT':
+        this.activeUsers = data.payload.users;
+        break;
+      case 'ERROR':
+        break;
+    }
   }
 
   authenticateUser(login: string, password: string, id) {
@@ -30,7 +51,7 @@ class Requests {
 
     // Send the request
 
-    return this.server.send(JSON.stringify(request));
+    if (this.server) this.server.send(JSON.stringify(request));
   }
 }
 
