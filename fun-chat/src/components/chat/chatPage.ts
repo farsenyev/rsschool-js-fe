@@ -4,22 +4,32 @@ class ChatPage {
   onLogout: Function;
   container: HTMLElement | null;
   name: string | null;
+  offlineUsers: [];
+  onlineUsers: [];
 
   constructor(callback: Function) {
     this.container = null;
     this.onLogout = callback;
     this.name = '';
+    this.offlineUsers = [];
+    this.onlineUsers = [];
 
     this.init();
   }
 
   init() {
-    this.getName()
+    this.getName();
+    this.getUsers()
     this.createHtml();
   }
 
-  getName(){
-    this.name = localStorage.getItem('username');
+  getName() {
+    this.name = JSON.parse(<string>sessionStorage.getItem('userData')).login;
+  }
+
+  getUsers(){
+    this.offlineUsers = JSON.parse(<string>sessionStorage.getItem('offlineUsers'));
+    this.onlineUsers = JSON.parse(<string>sessionStorage.getItem('onlineUsers'));
   }
 
   createHtml() {
@@ -27,7 +37,7 @@ class ChatPage {
     this.container.classList.add('chat-container');
 
     this.createHeader();
-    this.createMainContainer()
+    this.createMainContainer();
     this.createFooter();
   }
 
@@ -52,7 +62,7 @@ class ChatPage {
     this.container?.append(con);
   }
 
-  createMainContainer(){
+  createMainContainer() {
     const con = document.createElement('div');
     con.classList.add('main-chat-container');
 
@@ -67,7 +77,7 @@ class ChatPage {
     const usrCon = document.createElement('div');
     usrCon.classList.add('users');
 
-    this.createUser(usrCon)
+    this.createUser(usrCon);
 
     const msgs = document.createElement('div');
     msgs.classList.add('messages');
@@ -85,30 +95,63 @@ class ChatPage {
     const sendBtn = document.createElement('button');
     sendBtn.classList.add('send-btn');
     sendBtn.innerHTML = '>';
-    sendBtn.addEventListener('click', ()=>{})
+    sendBtn.addEventListener('click', () => {});
 
     users.append(search, usrCon);
-    textCon.append(msgText, sendBtn)
-    msgs.append(messageCon, textCon)
+    textCon.append(msgText, sendBtn);
+    msgs.append(messageCon, textCon);
     con.append(users, msgs);
 
-    this.container?.append(con)
+    this.container?.append(con);
   }
 
-  createUser(parent){
+  createUser(parent) {
+    this.getUsers()
     const userCon = document.createElement('div');
     userCon.classList.add('user');
 
     const userStatus = document.createElement('div');
     userStatus.classList.add('user-status');
-    //TODO: 'offline-user' css class for offline user
 
     const userName = document.createElement('h5');
     userName.classList.add('username');
-    userName.innerHTML = `${this.name}`
+    userName.innerHTML = `${this.name}`;
 
-    userCon.append(userStatus, userName)
-    parent.append(userCon)
+    userCon.append(userStatus, userName);
+    parent.append(userCon);
+
+    for (let user: {login: string, isLogged: boolean} in this.onlineUsers){
+      console.log(this.onlineUsers, this.onlineUsers[user])
+      const userCon = document.createElement('div');
+      userCon.classList.add('user');
+
+      const userStatus = document.createElement('div');
+      userStatus.classList.add('user-status');
+
+      const userName = document.createElement('h5');
+      userName.classList.add('username');
+      userName.innerHTML = `${this.onlineUsers[user].login}`;
+
+      userCon.append(userStatus, userName);
+      parent.append(userCon);
+    }
+
+    for (let user: {login: string, isLogged: boolean} in this.offlineUsers){
+      const userCon = document.createElement('div');
+      userCon.classList.add('user');
+
+      const userStatus = document.createElement('div');
+      userStatus.classList.add('user-status');
+      if (!user.isLogged) userStatus.classList.add('offline-user')
+
+      const userName = document.createElement('h5');
+      userName.classList.add('username');
+      userName.innerHTML = `${this.offlineUsers[user].login}`;
+
+      userCon.append(userStatus, userName);
+      parent.append(userCon);
+    }
+
   }
 
   createFooter() {

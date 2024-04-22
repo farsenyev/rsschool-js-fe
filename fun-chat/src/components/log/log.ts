@@ -1,19 +1,19 @@
 import './logStyle.css';
-// import Requests from "../requests/requests";
+import Requests from "../requests/requests";
 
 class Log {
   onValidate: Function;
   container: HTMLElement | null;
   nameValidated: boolean;
   passValidated: boolean;
-  // req: Requests | null;
+  req: Requests | null;
   id: number;
 
   constructor(callback: Function) {
     this.container = null;
     this.nameValidated = false;
     this.passValidated = false;
-    // this.req = null;
+    this.req = null;
     this.id = 0;
     this.onValidate = callback;
 
@@ -21,7 +21,7 @@ class Log {
   }
 
   init() {
-    // this.req = new Requests()
+    this.req = new Requests()
     this.createHtml();
   }
 
@@ -70,22 +70,27 @@ class Log {
   }
 
   validateForms(str: string, length: number) {
-    const regex = new RegExp(`^[A-Z][a-zA-Z-]{${length},}$`);
+    const regex = new RegExp(`^[A-Z][a-zA-Z-]{${length-1},}$`);
     return regex.test(str);
   }
 
   validateAllForms() {
     if (this.nameValidated && this.passValidated) {
       // this.id ++;
-      // const log = document.getElementById('input-name')
-      // const login = (log as HTMLInputElement).value;
-      // const pas = document.getElementById('input-password')
-      // const password = (pas as HTMLInputElement).value;
-      // TODO: sent request to server
-      // this.req?.authenticateUser(login, password, String(this.id))
-      // TODO: treat request
+      const log = document.getElementById('input-name')
+      const login = (log as HTMLInputElement).value;
+      const pas = document.getElementById('input-password')
+      const password = (pas as HTMLInputElement).value;
+
+      this.req?.authenticateUser(login, password);
+      this.saveData(login, password)
+
       this.onValidate();
     }
+  }
+
+  saveData(x, y){
+    sessionStorage.setItem('userData', JSON.stringify({login: x, password: y}));
   }
 
   getHtml(): Node {

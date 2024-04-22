@@ -11,7 +11,7 @@
   align-items: center;
 }
 
-.main-chat-container{
+.main-chat-container {
   /*border: #242424 1px solid;*/
   /*border-radius: 15px;*/
   display: flex;
@@ -21,7 +21,7 @@
   gap: 15px;
 }
 
-.users-container{
+.users-container {
   border: #242424 1px solid;
   border-radius: 15px;
   width: 250px;
@@ -30,24 +30,25 @@
   flex-direction: column;
   justify-content: flex-start;
   padding: 10px;
+  overflow: scroll;
 }
 
-.search-user{
+.search-user {
   opacity: 0.7;
 }
 
-.search-user:focus{
+.search-user:focus {
   opacity: 1;
   outline: none;
   border-bottom: 2px solid aliceblue;
 }
 
-.users{
+.users {
   display: flex;
   flex-direction: column;
 }
 
-.user{
+.user {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
@@ -56,18 +57,18 @@
   width: 95%;
 }
 
-.user-status{
+.user-status {
   background: #32ff39;
   border-radius: 100%;
   width: 7px;
   height: 7px;
 }
 
-.offline-user{
+.offline-user {
   background: #1a1a1a;
 }
 
-.messages{
+.messages {
   border: #242424 1px solid;
   border-radius: 15px;
   height: 600px;
@@ -79,12 +80,12 @@
   padding: 10px;
 }
 
-.message-container{
+.message-container {
   height: 95%;
   width: 100%;
 }
 
-.text-con{
+.text-con {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -92,11 +93,11 @@
   gap: 5px;
 }
 
-.send-btn{
+.send-btn {
   height: 50px;
 }
 
-.msg-text{
+.msg-text {
   background: white;
   border-bottom: none;
   border-radius: 15px;
@@ -105,15 +106,14 @@
   color: #1a1a1a;
   padding: 10px;
 }
-.msg-text:focus{
+.msg-text:focus {
   outline: none;
   border: none;
 }
 
-.msg-text::placeholder{
+.msg-text::placeholder {
   text-align: left;
 }
-
 
 .chat-info-container {
   border: #242424 1px solid;
