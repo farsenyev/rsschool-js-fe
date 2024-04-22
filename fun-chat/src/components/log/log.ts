@@ -1,5 +1,5 @@
 import './logStyle.css';
-import Requests from "../requests/requests";
+import Requests from '../requests/requests';
 
 class Log {
   onValidate: Function;
@@ -21,7 +21,7 @@ class Log {
   }
 
   init() {
-    this.req = new Requests()
+    this.req = new Requests();
     this.createHtml();
   }
 
@@ -70,27 +70,27 @@ class Log {
   }
 
   validateForms(str: string, length: number) {
-    const regex = new RegExp(`^[A-Z][a-zA-Z-]{${length-1},}$`);
+    const regex = new RegExp(`^[A-Z][a-zA-Z-]{${length - 1},}$`);
     return regex.test(str);
   }
 
   validateAllForms() {
     if (this.nameValidated && this.passValidated) {
       // this.id ++;
-      const log = document.getElementById('input-name')
+      const log = document.getElementById('input-name');
       const login = (log as HTMLInputElement).value;
-      const pas = document.getElementById('input-password')
+      const pas = document.getElementById('input-password');
       const password = (pas as HTMLInputElement).value;
 
       this.req?.authenticateUser(login, password);
-      this.saveData(login, password)
+      this.saveData(login, password);
 
       this.onValidate();
     }
   }
 
-  saveData(x, y){
-    sessionStorage.setItem('userData', JSON.stringify({login: x, password: y}));
+  saveData(x, y) {
+    sessionStorage.setItem('userData', JSON.stringify({ login: x, password: y }));
   }
 
   getHtml(): Node {

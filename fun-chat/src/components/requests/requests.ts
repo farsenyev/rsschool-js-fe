@@ -17,17 +17,17 @@ class Requests {
       const active = {
         id: 'string',
         type: 'USER_ACTIVE',
-        payload: null
-      }
+        payload: null,
+      };
       const inactive = {
         id: 'string',
         type: 'USER_INACTIVE',
-        payload: null
-      }
+        payload: null,
+      };
 
-      if (this.server) this.server.send(JSON.stringify(active))
-      if (this.server) this.server.send(JSON.stringify(inactive))
-    }, 100)
+      if (this.server) this.server.send(JSON.stringify(active));
+      if (this.server) this.server.send(JSON.stringify(inactive));
+    }, 100);
   }
 
   msgHandler(msg: MessageEvent) {
@@ -35,19 +35,19 @@ class Requests {
     switch (data.type) {
       case 'USER_ACTIVE':
         this.activeUsers = data.payload.users;
-        sessionStorage.setItem('onlineUsers', JSON.stringify(this.activeUsers))
+        sessionStorage.setItem('onlineUsers', JSON.stringify(this.activeUsers));
         break;
       case 'USER_INACTIVE':
         this.activeUsers = data.payload.users;
-        sessionStorage.setItem('offlineUsers', JSON.stringify(this.activeUsers))
+        sessionStorage.setItem('offlineUsers', JSON.stringify(this.activeUsers));
         break;
       case 'USER_LOGIN':
         this.activeUsers = data.payload.users;
-        sessionStorage.setItem('userData', JSON.stringify(this.activeUsers))
+        sessionStorage.setItem('userData', JSON.stringify(this.activeUsers));
         break;
       case 'USER_LOGOUT':
         this.activeUsers = data.payload.users;
-        sessionStorage.removeItem('userData')
+        sessionStorage.removeItem('userData');
         break;
       case 'ERROR':
         break;

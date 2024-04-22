@@ -19,7 +19,7 @@ class ChatPage {
 
   init() {
     this.getName();
-    this.getUsers()
+    this.getUsers();
     this.createHtml();
   }
 
@@ -27,7 +27,7 @@ class ChatPage {
     this.name = JSON.parse(<string>sessionStorage.getItem('userData')).login;
   }
 
-  getUsers(){
+  getUsers() {
     this.offlineUsers = JSON.parse(<string>sessionStorage.getItem('offlineUsers'));
     this.onlineUsers = JSON.parse(<string>sessionStorage.getItem('onlineUsers'));
   }
@@ -106,7 +106,7 @@ class ChatPage {
   }
 
   createUser(parent) {
-    this.getUsers()
+    this.getUsers();
     const userCon = document.createElement('div');
     userCon.classList.add('user');
 
@@ -120,8 +120,8 @@ class ChatPage {
     userCon.append(userStatus, userName);
     parent.append(userCon);
 
-    for (let user: {login: string, isLogged: boolean} in this.onlineUsers){
-      console.log(this.onlineUsers, this.onlineUsers[user])
+    for (let user: { login: string; isLogged: boolean } in this.onlineUsers) {
+      console.log(this.onlineUsers, this.onlineUsers[user]);
       const userCon = document.createElement('div');
       userCon.classList.add('user');
 
@@ -136,13 +136,13 @@ class ChatPage {
       parent.append(userCon);
     }
 
-    for (let user: {login: string, isLogged: boolean} in this.offlineUsers){
+    for (let user: { login: string; isLogged: boolean } in this.offlineUsers) {
       const userCon = document.createElement('div');
       userCon.classList.add('user');
 
       const userStatus = document.createElement('div');
       userStatus.classList.add('user-status');
-      if (!user.isLogged) userStatus.classList.add('offline-user')
+      if (!user.isLogged) userStatus.classList.add('offline-user');
 
       const userName = document.createElement('h5');
       userName.classList.add('username');
@@ -151,7 +151,6 @@ class ChatPage {
       userCon.append(userStatus, userName);
       parent.append(userCon);
     }
-
   }
 
   createFooter() {
