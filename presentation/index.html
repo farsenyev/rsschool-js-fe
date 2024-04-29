@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+						## Stock Market Analysis and Prediction via artificial intelligence
+
+						---
+						## Introduction
+						The stock exchange, renowned for its dynamism and complexity, stands as one of the most intricate arenas for investment, where prices are subject to the influence of myriad factors. The intricacies of market processes, anomalous fluctuations, and a high degree of randomness pose challenges for forecasting models.
+					</textarea>
+				</section>
+				<section>
+					<section>
+						<h2>Significance</h2>
+					</section>
+
+					<section  data-background-image="meme3slide.jpg" style="background-color: rgba(0,0,0,0.5)">
+						<h4>Market Uncertainty</h4>
+						<p >Stock markets are inherently uncertain and volatile. Forecasting price dynamics aids investors and traders in making informed decisions and managing risks amid an unstable environment.</p>
+					</section>
+					<section data-background-image="meme4slide.png" style="background-color: rgba(0,0,0,0.5)">
+						<h4>Vast Data Volumes</h4>
+						<p> Modern data collection and storage technologies enable the accumulation and analysis of large volumes of structured and unstructured financial market data. This holds the potential for developing more accurate and robust forecasting models based on neural networks.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Data working</h2>
+					</section>
+					<section>
+						<h4>Data sources</h4>
+						<p>Data for this study were sourced from the Finam broker website, as obtaining them from the official Moscow Exchange site proved unfeasible. The latter offers a limited selection of tools, necessitating a paid subscription for access to comprehensive data.</p>
+					</section>
+					<section>
+						<h4>Data description</h4>
+						<p>The dataset, stored in a CSV file, comprises five attributes: opening, closing, high, and low prices, alongside trade volume, each timestamped for visualization purposes.</p>
+					</section>
+					<section>
+						<h4>Data processing</h4>
+						<p>Anomalies, represented by abrupt price spikes within 1-5 candlesticks (depending on the timeframe), were initially removed using Gaussian filtering and the Isolation Forest method. Additionally, due to the stock market's five-day trading week, weekends were excluded. This action did not affect the outcome, as alternative methods were employed for handling gaps in the data, with the selected approach proving most effective in terms of quality and efficiency. Subsequently, data normalization via Min-Max Scaling facilitated network training.</p>
+					</section>
+				</section>
+				<section>
+					<section>
+						<h2>Model selection</h2>
+						<p>For this task, a plethora of models were available, among which VARMAX (Vector Autoregressive Moving-Average with Exogenous Variables) and GRU (Gated Recurrent Unit) were chosen.</p>
+					</section>
+					<section>
+						<h4>GRU</h4>
+					</section>
+					<section data-background-image="gru.png" style="background-color: rgba(0,0,0,0.5)">
+						<p>GRU represents an enhanced version of conventional recurrent neural networks, boasting fewer parameters and typically simpler training procedures. Equipped with built-in gating mechanisms, GRU effectively mitigates the vanishing gradient problem, regulating information flow within the network to retain or discard pertinent information during training.</p>
+					</section>
+					<section>
+						<p>This capability enables the network to memorize longer-term dependencies, preserving information across multiple time steps. Notably, GRU outputs data with timestamps, facilitating straightforward visualization.</p>
+					</section>
+					<section>
+						<p>Results: mea = 0,2351; mse = 0,1293;</p>
+						<img src="gruRes.png" alt="gru result">
+					</section>
+					<section>
+						<h4>Varmax</h4>
+					</section>
+					<section>
+						<p>VARMAX extends the VAR model, incorporating exogenous variables that may influence the time series but are not part of it. Evidently, VARMAX inherits the advantages of VAR while augmenting forecasting quality by accommodating external factors. Initially lacking timestamps in its output, VARMAX presents data in a list format, rendering visualization challenging.</p>
+					</section>
+					<section>
+						<p>Results: mae= 0,19384; mse = 0,10253;</p>
+						<img src="varmaxRes.png" alt="varmax results">
+					</section>
+				</section>
+				<section>
+					<h2>Conclusion</h2>
+					<p>Developing a neural network for market analysis and prediction presents a tangible yet formidable endeavor. Although the proliferation of data augurs well for training, the concomitant escalation in analysis and preparation complexity poses formidable challenges. To enhance future endeavors, a proposal is made to diversify model structures, incorporating a hybrid approach with three models, alongside integrating textual news analysis.</p>
+				</section>
+			</div>
+		</div>
+
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
