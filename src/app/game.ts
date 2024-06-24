@@ -14,6 +14,9 @@ interface Sentence {
   answer: string[];
 }
 
+const minWidth = 50;
+const letterWidth = 5;
+
 class Game {
   level: level;
   sentences: Sentence[] = [];
@@ -93,7 +96,7 @@ class Game {
           sector.classList.add("word-sector");
           sector.innerHTML = word;
           const wordLength: number = sector.innerHTML.trim().split("").length;
-          sector.style.width = `${50 + 5 * wordLength}px`;
+          sector.style.width = `${minWidth + letterWidth * wordLength}px`;
           sector.addEventListener("click", this.clickHandler.bind(this));
           wordContainer.append(sector);
         });

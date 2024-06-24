@@ -12,7 +12,10 @@
     "pre-push": "eslint --fix",
     "lint": "eslint --ext .ts src",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d ./dist -e puzzle"
+    "deploy": "gh-pages -d ./dist -e puzzle",
+    "format": "prettier --write .",
+    "ci:format": "prettier --check .",
+    "validate-branch-name": "validate-branch-name"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^7.2.0",

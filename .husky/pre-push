@@ -1,1 +1,1 @@
-npm run pre-push
+npm run pre-push && npm run validate-branch-name
