@@ -1,4 +1,4 @@
 {
-  "pattern": "^(feat|fix|docs|refactor):/[a-z0-9\\-]+$",
+  "pattern": "^(feat|fix|docs|refactor)\/[a-z0-9\\-]+$",
   "errorMsg": "Branch name must start with 'feat:', 'fix:', 'docs:' or 'refactor:' and contain only lowercase letters, numbers, and hyphens."
 }
