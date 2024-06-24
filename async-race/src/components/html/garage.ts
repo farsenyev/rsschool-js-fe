@@ -118,7 +118,7 @@ class Garage{
     createBtns(){
         const carName: HTMLElement = document.createElement('input');
         ;(carName as HTMLInputElement).value = this.carNameValue;
-        carName.addEventListener('blur', () => {
+        carName.addEventListener('blur', (event: Event) => {
             this.carNameValue = (event!.target as HTMLInputElement).value;
             this.setCarNameLocalData();
         });
@@ -127,7 +127,7 @@ class Garage{
 
         const carColor: HTMLElement = document.createElement('input');
         ;(carColor as HTMLInputElement).value = this.carColorValue
-        carColor.addEventListener('blur', () => {
+        carColor.addEventListener('blur', (event: Event) => {
             this.carColorValue = (event!.target as HTMLInputElement).value;
             this.setCarColorLocalData();
         });
@@ -138,7 +138,7 @@ class Garage{
         const changeName: HTMLInputElement = document.createElement('input');
         changeName.value = this.changedCarNameValue;
         ;(changeName as HTMLInputElement).value = this.changedCarNameValue
-        changeName.addEventListener('blur', () => {
+        changeName.addEventListener('blur', (event: Event) => {
             this.changedCarNameValue = (event!.target as HTMLInputElement).value;
             this.setCarNameChangedLocalData()
         })
@@ -147,7 +147,7 @@ class Garage{
 
         const changeColor: HTMLElement = document.createElement('input');
         ;(changeColor as HTMLInputElement).value = this.changedCarColorValue;
-        changeColor.addEventListener('blur', () => {
+        changeColor.addEventListener('blur', (event: Event) => {
             this.changedCarColorValue = (event!.target as HTMLInputElement).value;
             this.setCarColorChangedLocalData()
         })
@@ -482,8 +482,9 @@ class Garage{
         const text = document.createElement('h1');
         text.classList.add('modal-text');
 
+        let winnerData : Cars | undefined | null = null;
         if (Array.isArray(this.data)){
-            var winnerData = this.data?.find((car: Cars) => car.id === id)
+            winnerData = this.data?.find((car: Cars) => car.id === id)
         }
 
         if (winnerData) text.innerHTML = `${winnerData.name} wins the race in ${time / 1000}s`
