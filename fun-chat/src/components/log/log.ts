@@ -2,14 +2,14 @@ import './logStyle.css';
 import Requests from '../requests/requests';
 
 class Log {
-  onValidate: Function;
+  onValidate: () => void;
   container: HTMLElement | null;
   nameValidated: boolean;
   passValidated: boolean;
   req: Requests | null;
   id: number;
 
-  constructor(callback: Function) {
+  constructor(callback: () => void) {
     this.container = null;
     this.nameValidated = false;
     this.passValidated = false;
@@ -76,7 +76,6 @@ class Log {
 
   validateAllForms() {
     if (this.nameValidated && this.passValidated) {
-      // this.id ++;
       const log = document.getElementById('input-name');
       const login = (log as HTMLInputElement).value;
       const pas = document.getElementById('input-password');

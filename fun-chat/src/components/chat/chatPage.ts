@@ -1,13 +1,13 @@
 import './chatStyle.css';
 
 class ChatPage {
-  onLogout: Function;
+  onLogout: () => void;
   container: HTMLElement | null;
   name: string | null;
   offlineUsers: [];
   onlineUsers: [];
 
-  constructor(callback: Function) {
+  constructor(callback: () => void) {
     this.container = null;
     this.onLogout = callback;
     this.name = '';
@@ -54,7 +54,6 @@ class ChatPage {
     const logOut = document.createElement('button');
     logOut.innerHTML = 'Logout';
     logOut.addEventListener('click', () => {
-      //TODO: logout user
       this.onLogout();
     });
 
@@ -71,8 +70,6 @@ class ChatPage {
 
     const search = document.createElement('input');
     search.classList.add('search-user');
-    //TODO: make search by name
-    // search.addEventListener()
 
     const usrCon = document.createElement('div');
     usrCon.classList.add('users');
@@ -120,7 +117,7 @@ class ChatPage {
     userCon.append(userStatus, userName);
     parent.append(userCon);
 
-    for (let user: { login: string; isLogged: boolean } in this.onlineUsers) {
+    this.onlineUsers.forEach((user: { login: string; isLogged: boolean }) => {
       console.log(this.onlineUsers, this.onlineUsers[user]);
       const userCon = document.createElement('div');
       userCon.classList.add('user');
@@ -134,9 +131,9 @@ class ChatPage {
 
       userCon.append(userStatus, userName);
       parent.append(userCon);
-    }
+    })
 
-    for (let user: { login: string; isLogged: boolean } in this.offlineUsers) {
+    this.offlineUsers.forEach((user: { login: string; isLogged: boolean }) => {
       const userCon = document.createElement('div');
       userCon.classList.add('user');
 
@@ -150,7 +147,7 @@ class ChatPage {
 
       userCon.append(userStatus, userName);
       parent.append(userCon);
-    }
+    })
   }
 
   createFooter() {

@@ -8,7 +8,7 @@ class Chat {
   chat: ChatPage | null;
   infoContainer: HTMLElement | null;
 
-  constructor(parent) {
+  constructor(parent: HTMLElement) {
     this.parent = parent;
     this.mainContainer = null;
     this.log = null;

@@ -1,7 +1,5 @@
 .chat-container {
   background: #d7012a;
-  /*#101096;*/
-  /*#d7012a*/
   border-radius: 15px;
   padding: 17px;
   gap: 17px;
@@ -12,8 +10,6 @@
 }
 
 .main-chat-container {
-  /*border: #242424 1px solid;*/
-  /*border-radius: 15px;*/
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -117,8 +113,6 @@
 
 .chat-info-container {
   border: #242424 1px solid;
-  /*#d7012a*/
-  /*#242424*/
   border-radius: 15px;
   gap: 5px;
 
