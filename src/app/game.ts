@@ -14,8 +14,8 @@ interface Sentence {
   answer: string[];
 }
 
-const minWidth = 50;
-const letterWidth = 5;
+const MIN_WIDTH = 50;
+const LETTER_WIDTH = 5;
 
 class Game {
   level: level;
@@ -96,7 +96,7 @@ class Game {
           sector.classList.add("word-sector");
           sector.innerHTML = word;
           const wordLength: number = sector.innerHTML.trim().split("").length;
-          sector.style.width = `${minWidth + letterWidth * wordLength}px`;
+          sector.style.width = `${MIN_WIDTH + LETTER_WIDTH * wordLength}px`;
           sector.addEventListener("click", this.clickHandler.bind(this));
           wordContainer.append(sector);
         });
